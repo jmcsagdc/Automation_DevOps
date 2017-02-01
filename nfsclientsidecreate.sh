@@ -12,6 +12,6 @@
 echo "mount `hostname`:/home /home" >> nfsclients_mount.sh
 echo "mount `hostname`:/var/nfs /var/nfs" >> nfsclients_mount.sh
 echo >> nfsclients_mount.sh
-echo "Append to /etc/fstab" >> nfsclients_mount.sh
+echo "# Append to /etc/fstab" >> nfsclients_mount.sh
 echo "`hostname`:/home   /home   nfs    auto  0  0" >> nfsclients_mount.sh
 echo "`hostname`:/var/nfs   /var/nfs   nfs    auto  0  0" >> nfsclients_mount.sh
