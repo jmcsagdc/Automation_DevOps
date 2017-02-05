@@ -2,19 +2,19 @@ newUsername=raw_input('Enter USERNAME: ')
 
 import os
 tempPass="1"+newUsername+"9"
-print("The user's temporary password is: "+tempPass+" so they need to change it!                                                                                        ")
+print("The user's temporary password is: "+tempPass+" so they need to change it!")
 
 bigstring="slappasswd -s "+tempPass
 myHash=os.popen(bigstring).read()
 
 # Get unique uidNumber
-currentNumberOS="ldapsearch -x -b dc=jmcsagdc,dc=local | grep uidNumber | awk '{                                                                                        print $2}' | uniq | sort -g -r | head -1"
+currentNumberOS="ldapsearch -x -b dc=jmcsagdc,dc=local | grep uidNumber | awk '{print $2}' | uniq | sort -g -r | head -1"
 currentNumber=os.popen(currentNumberOS).read()
 # Add one to it for next user
 nextUserNumber=int(currentNumber)+1
 nextUserNumber=str(nextUserNumber)
 
-outfileName=newUsername+'.ldif'
+outfileName='/etc/openldap/slapd.d/'+newUsername+'.ldif'
 outfile=open(outfileName, "w")
 
 outfile.write('dn: uid='+newUsername+',ou=People,dc=jmcsagdc,dc=local\n')
