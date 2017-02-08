@@ -1,8 +1,6 @@
 # Run this on NFS SERVER and scp the output file to the clients for now
 
-
-# The following commented lines are there so we distinguish the 
-# mount locations from the OS versions of the same.
+echo "apt install -y nfs-common" >> nfsclients_mount.sh
 echo "echo \"#####################    Creating /var/nfs mount points   #####################\"" >> nfsclients_mount.sh
 echo "mkdir -p /var/nfs/home" >> nfsclients_mount.sh
 echo "mkdir -p /var/nfs/dev" >> nfsclients_mount.sh
