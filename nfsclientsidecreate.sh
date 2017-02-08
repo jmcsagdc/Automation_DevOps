@@ -10,8 +10,10 @@
 #mount <sever>:/var/nfs /mnt/nfs/var/nfs
 
 echo "mount `hostname`:/home /home" >> nfsclients_mount.sh
-# echo "mount `hostname`:/var/nfs /var/nfs" >> nfsclients_mount.sh
+echo "mount `hostname`:/var/dev /dev" >> nfsclients_mount.sh
+echo "mount `hostname`:/var/config /config" >> nfsclients_mount.sh
 echo >> nfsclients_mount.sh
-echo "echo \"# Append to /etc/fstab\"" >> nfsclients_mount.sh
+echo "echo \"#####################    Echo into fstab on CLIENT   #####################\"" 
 echo "echo \"`hostname`:/home   /home   nfs    auto  0  0\"" >> nfsclients_mount.sh
-# echo "echo \"`hostname`:/var/nfs   /var/nfs   nfs    auto  0  0\"" >> nfsclients_mount.sh
+echo "echo \"`hostname`:/var/dev   /dev   nfs    auto  0  0\"" >> nfsclients_mount.sh
+echo "echo \"`hostname`:/var/config   /config   nfs    auto  0  0\"" >> nfsclients_mount.sh
