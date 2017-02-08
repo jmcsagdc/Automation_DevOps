@@ -13,7 +13,8 @@ echo "mount `hostname`:/home /home" >> nfsclients_mount.sh
 echo "mount `hostname`:/var/dev /dev" >> nfsclients_mount.sh
 echo "mount `hostname`:/var/config /config" >> nfsclients_mount.sh
 echo >> nfsclients_mount.sh
-echo "echo \"#####################    Echo into fstab on CLIENT   #####################\"" 
+echo "echo \"#####################    Echo into fstab on CLIENT   #####################\"" >> nfsclients_mount.sh
 echo "echo \"`hostname`:/home   /home   nfs    auto  0  0\"" >> nfsclients_mount.sh
 echo "echo \"`hostname`:/var/dev   /dev   nfs    auto  0  0\"" >> nfsclients_mount.sh
 echo "echo \"`hostname`:/var/config   /config   nfs    auto  0  0\"" >> nfsclients_mount.sh
+echo "Copy the file nfsclients_mount.sh to the client and run it there."
