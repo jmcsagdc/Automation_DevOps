@@ -8,9 +8,9 @@ echo "mkdir -p /var/nfs/home" >> nfsclients_mount.sh
 echo "mkdir -p /var/nfs/dev" >> nfsclients_mount.sh
 echo "mkdir -p /var/nfs/config" >> nfsclients_mount.sh
 echo "echo \"#####################    Mounting /var/nfs mount points   #####################\"" >> nfsclients_mount.sh
-echo "mount `hostname`:/home /var/nfs/home" >> nfsclients_mount.sh
-echo "mount `hostname`:/var/dev /var/nfs/dev" >> nfsclients_mount.sh
-echo "mount `hostname`:/var/config /var/nfs/config" >> nfsclients_mount.sh
+echo "mount -v -t nfs `hostname`:/home /var/nfs/home" >> nfsclients_mount.sh
+echo "mount -v -t nfs `hostname`:/var/dev /var/nfs/dev" >> nfsclients_mount.sh
+echo "mount -v -t nfs `hostname`:/var/config /var/nfs/config" >> nfsclients_mount.sh
 echo >> nfsclients_mount.sh
 echo "echo \"#####################    Adding /var/nfs mount points to /etc/fstab #####################\"" >> nfsclients_mount.sh
 #echo "echo \"#####################    Echo into fstab on CLIENT   #####################\"" >> nfsclients_mount.sh
