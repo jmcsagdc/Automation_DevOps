@@ -8,8 +8,12 @@ bigstring="slappasswd -s "+tempPass
 myHash=os.popen(bigstring).read()
 
 # Get unique uidNumber
+
 currentNumberOS="ldapsearch -x -b dc=jmcsagdc,dc=local | grep uidNumber | awk '{print $2}' | uniq | sort -g -r | head -1"
 currentNumber=os.popen(currentNumberOS).read()
+if currentNumber == "":
+    currentNumber=1500 # In case this is the first new user
+                       # so prior read() returned blank value
 # Add one to it for next user
 nextUserNumber=int(currentNumber)+1
 nextUserNumber=str(nextUserNumber)
