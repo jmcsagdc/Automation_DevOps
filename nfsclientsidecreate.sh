@@ -1,4 +1,17 @@
 # Run this on NFS SERVER and scp the output file to the clients for now
+myKernel=$(uname -r | grep 'generic')
+
+echo 'myKernel is ' $myKernel
+
+if uname -r | grep 'generic' 1>/dev/null
+then
+  echo "Wrong OS" # If Ubuntu is NOT target OS
+  exit 1
+else
+  echo "CentOS is correct for server"
+  #echo "Wrong OS" # If redhat is NOT target
+  #exit 1
+fi
 
 echo "apt install -y nfs-common" >> nfsclients_mount.sh
 echo "echo \"#####################    Creating /var/nfs mount points   #####################\"" >> nfsclients_mount.sh
