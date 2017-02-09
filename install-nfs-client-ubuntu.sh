@@ -1,3 +1,5 @@
+echo "Wrong file. Doing nothing."
+: '
 #install the nfs client packages
 apt-get -y install nfs-common nfs-kernel-server
 service nfs-kernel-server start
@@ -9,3 +11,4 @@ mkdir -p /mnt/nfs/var/config
 
 #start the mapping service
 service nfs-idmapd start
+'
