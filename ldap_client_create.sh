@@ -1,3 +1,17 @@
+myKernel=$(uname -r | grep 'generic')
+
+echo 'myKernel is ' $myKernel
+
+if uname -r | grep 'generic' 1>/dev/null
+then
+  echo "Ubuntu is correct for server"
+  #echo "Wrong OS" # If Ubuntu is NOT target OS
+  #exit 1
+else
+  echo "Wrong OS" # If redhat is NOT target
+  exit 1
+fi
+
 # Install the openldap client stuff
 
 echo "Go non-interactive for install"
