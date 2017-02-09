@@ -12,7 +12,7 @@ else
   #echo "Wrong OS" # If redhat is NOT target
   #exit 1
 fi
-
+touch nfsclients_mount.sh
 echo "apt install -y nfs-common" >> nfsclients_mount.sh
 echo "echo \"#####################    Creating /var/nfs mount points   #####################\"" >> nfsclients_mount.sh
 echo "mkdir -p /var/nfs/home" >> nfsclients_mount.sh
