@@ -24,7 +24,7 @@ cp /etc/ldap.conf /etc/ldap.conf.orig
 # Edit ldap.conf
 perl -pi -e 's|base dc=example,dc=net|base dc=jmcsagdc,dc=local|g' /etc/ldap.conf
 
-perl -pi -e 's|uri ldapi:///|uri ldap://$serverHostname|g' /etc/ldap.conf
+perl -pi -e "s|uri ldapi:///|uri ldap://$serverHostname|g" /etc/ldap.conf
 
 perl -pi -e 's|rootbinddn cn=manager,dc=example,dc=net|#rootbinddn cn=manager,dc=example,dc=net|g' /etc/ldap.conf
 
