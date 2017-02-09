@@ -1,5 +1,19 @@
 #!/bin/bash
 
+myKernel=$(uname -r | grep 'generic')
+
+echo 'myKernel is ' $myKernel
+
+if uname -r | grep 'generic' 1>/dev/null
+then
+  echo "Wrong OS" # If Ubuntu is NOT target OS
+  exit 1
+else
+  echo "CentOS is correct for server"
+  #echo "Wrong OS" # If redhat is NOT target
+  #exit 1
+fi
+
 # Must run as root, so check for root and exit if not
 
 if [[ $EUID -ne 0 ]]; then
