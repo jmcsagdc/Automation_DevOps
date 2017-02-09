@@ -1,4 +1,3 @@
-# Run this on NFS SERVER and scp the output file to the clients for now
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
