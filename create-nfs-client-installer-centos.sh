@@ -29,3 +29,4 @@ echo "echo \"`hostname`:/home   /var/nfs/home   nfs    auto  0  0\" >> /etc/fsta
 echo "echo \"`hostname`:/var/dev   /var/nfs/dev   nfs    auto  0  0\" >> /etc/fstab" >> nfsclients_mount.sh
 echo "echo \"`hostname`:/var/config   /var/nfs/config   nfs    auto  0  0\" >> /etc/fstab" >> nfsclients_mount.sh
 echo "Copy the file nfsclients_mount.sh to the client and run it there."
+#TODO change to NFS4
