@@ -21,8 +21,8 @@ def getServerList(servers,desktops):
         elif "server" in each:
             #print('server='+each) #DEBUG
             servers.append(each)
-        elif each == '':
-            print('empty='+each)
+        else each == '':
+            print "Extras: "+each+"\n"
     return servers
     return desktops
 
