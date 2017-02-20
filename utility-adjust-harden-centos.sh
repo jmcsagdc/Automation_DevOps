@@ -1,3 +1,17 @@
+myKernel=$(uname -r | grep 'generic')
+
+echo 'myKernel is ' $myKernel
+
+if uname -r | grep 'generic' 1>/dev/null
+then
+  echo "Wrong OS" # If Ubuntu is NOT target OS
+  exit 1
+else
+  echo "CentOS is correct for server"
+  #echo "Wrong OS" # If redhat is NOT target
+  #exit 1
+fi
+
 # Get global IP
 echo "Getting global IP"
 testglobalip=`curl -A '"Mozilla/4.0"' 91.198.22.70`
