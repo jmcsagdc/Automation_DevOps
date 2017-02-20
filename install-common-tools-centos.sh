@@ -12,6 +12,12 @@ else
   #exit 1
 fi
 
+echo "Installing networking tools..."
+yum install -y bind-utils
+
+echo "Installing wget..."
+yum install -y wget
+
 echo "Installing nano text editor..."
 yum install -y nano
 
