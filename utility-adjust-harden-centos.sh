@@ -16,6 +16,28 @@ perl -pi -e 's|\x25wheel|\x25adm|g' /etc/sudoers
 # LDAP users password aging
 
 # https for LDAP
+echo "Adding epel repo from FedoraProject.org"
+su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm'
+
+echo "Installing headless entropy generator"
+yum install -y haveged
+
+echo "Enable haveged start on boot"
+chkconfig haveged on
+
+echo "Starting haveged entropy generator"
+systemctl start haveged.service
+systemctl status haveged.service
+
+echo "Adding randomness testing tools"
+yum install -y rng-tools
+
+echo "The following command should show 998+ successes and a few failures. This is OK."
+cat /dev/random | rngtest -c 1000
+
+echo "This shows the entropy pool. Anything over 1000 is good and will replentish automatically"
+cat /proc/sys/kernel/random/entropy_avail
+
 # Install mod_ssl
 echo "Installing mod_ssl"
 yum install -y mod_ssl
@@ -39,8 +61,9 @@ cat /etc/ssl/certs/dhparam.pem | tee -a /etc/ssl/certs/apache-selfsigned.crt
 
 # Webserver changes for LDAP https port and aliases
 echo "Modify /etc/httpd.conf.d/ssl.conf to point to 443"
-#<VirtualHost _default_:443>
-perl -pi -e "s|bananas|Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
+#
+perl -pi -e "s|<VirtualHost _default_:443>|<VirtualHost _default_:443>
+Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
 Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 DocumentRoot \x22/usr/share/phpldapadmin/htdocs\x22
 ServerName `hostname`|g" /etc/httpd/conf.d/ssl.conf
