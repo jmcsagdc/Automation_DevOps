@@ -63,10 +63,13 @@ cat /etc/ssl/certs/dhparam.pem | tee -a /etc/ssl/certs/apache-selfsigned.crt
 echo "Modify /etc/httpd.conf.d/ssl.conf to point to 443"
 #
 perl -pi -e "s|<VirtualHost _default_:443>|<VirtualHost _default_:443>
+
 Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
 Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 DocumentRoot \x22/usr/share/phpldapadmin/htdocs\x22
 ServerName `hostname`|g" /etc/httpd/conf.d/ssl.conf
+
+#TODO change hostname to IP of the machine and avoid security exceptions in browser
 
 # No anonymous login for LDAP
 # (Should be installed this way. This makes sure.)
