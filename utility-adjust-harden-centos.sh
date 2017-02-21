@@ -21,6 +21,10 @@ myglobalip=`echo $testglobalip | awk '{print $NF}' | awk -F'<' '{print $1}'`
 
 echo "myglobalip = $myglobalip"
 
+myhostname=`hostname`
+
+echo "myhostname= $myhostname"
+
 # First the local permissions
 echo "Back up sudoers"
 cp /etc/sudoers /etc/sudoers.orig
@@ -76,11 +80,14 @@ echo "Creating SSL key and Certificate via openssl"
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/ssl/private/apache-selfsigned.key -out \
 /etc/ssl/certs/apache-selfsigned.crt \
--subj "/C=US/ST=WA/L=Seattle/O=IT/OU=NTI310IT/CN=$myglobalip"
-#TODO Fix this option string. Right now it doesn't get picked up.
+-subj "/C=US/ST=WA/L=Seattle/O=IT/OU=NTI310IT/CN=$myhostname"
+
 echo "Creating DH group"
 openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 cat /etc/ssl/certs/dhparam.pem | tee -a /etc/ssl/certs/apache-selfsigned.crt
+
+echo "Here is your cert: "
+openssl x509 -in /etc/ssl/certs/apache-selfsigned.crt -noout -text
 
 # Webserver changes for LDAP https port and aliases
 echo "Modify /etc/httpd.conf.d/ssl.conf to point to 443"
@@ -90,7 +97,7 @@ perl -pi -e "s|<VirtualHost _default_:443>|<VirtualHost _default_:443>
 Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
 Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 DocumentRoot \x22/usr/share/phpldapadmin/htdocs\x22
-ServerName $myglobalip:443|g" /etc/httpd/conf.d/ssl.conf
+ServerName $myhostname:443|g" /etc/httpd/conf.d/ssl.conf
 
 # No anonymous login for LDAP
 # (Should be installed this way. This makes sure.)
