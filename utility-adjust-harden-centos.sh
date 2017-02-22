@@ -103,8 +103,9 @@ ServerName $myhostname:443|g" /etc/httpd/conf.d/ssl.conf
 # (Should be installed this way. This makes sure.)
 perl -pi -e 's|\x2F\x2F \x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,true\x29\x3B|\x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,false\x29\x3B|g' /etc/phpldapadmin/config.php
 
-service httpd restart
-#TODO Modernize the restart of httpd
+# Restart httpd to pick up changes
+systemctl restart  httpd.service
+
 echo "curl your server:"
 curl -vvI https://`hostname`
 
