@@ -99,6 +99,31 @@ Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 DocumentRoot \x22/usr/share/phpldapadmin/htdocs\x22
 ServerName $myhostname:443|g" /etc/httpd/conf.d/ssl.conf
 
+perl -pi -e "s|SSLProtocol all -SSLv2|# SSLProtocol all -SSLv2|g" /etc/httpd/conf.d/ssl.conf
+perl -pi -e "s|SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA|# SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA|g" /etc/httpd/conf.d/ssl.conf
+perl -pi -e 's|</VirtualHost>|</VirtualHost>
+
+# Begin copied text
+# from https://cipherli.st/
+# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+#Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off
+SSLUseStapling on
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+# Requires Apache >= 2.4.11
+# SSLSessionTickets Off
+|g'  /etc/httpd/conf.d/ssl.conf
+
 # No anonymous login for LDAP
 # (Should be installed this way. This makes sure.)
 perl -pi -e 's|\x2F\x2F \x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,true\x29\x3B|\x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,false\x29\x3B|g' /etc/phpldapadmin/config.php
