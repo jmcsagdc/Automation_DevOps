@@ -1,4 +1,3 @@
-# CentOS only
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
@@ -22,16 +21,20 @@ fi
 echo "Installing postgres server packages"
 yum install -y postgresql-server postgresql-contrib
 
-echo "Allow postgres password authentication"
+
+echo "Drop DB security for install..."
+perl -pi -e 's|\x20ident|\x20trust|g' /var/lib/pgsql/data/pg_hba.conf
+
 postgresql-setup initdb
 
-perl -pi -e "s|host    all             all             127.0.0.1/32            ident
-host    all             all             ::1/128                 ident|host    all             all             127.0.0.1/32            md5
-host    all             all             ::1/128                 md5|g" /var/lib/pgsql/data/pg_hba.conf
 
 echo "Enable and start postgres"
 systemctl enable postgresql
 systemctl start postgresql
+
+psql -h localhost -U postgres postgres <<OPP
+ createdb test1 ;
+OPP
 
 # Configure within postgres
 #echo "Entering postgress"
@@ -40,9 +43,13 @@ systemctl start postgresql
 echo "Adding a fake user for postgres: dave/1password2"
 echo "1password2" > /tmp/xxx.pass
 
-psql -U postgres postgres <<OMG
+psql -h localhost -U postgres postgres <<OMG
  CREATE USER dave password '`cat /tmp/xxx.pass`' ;
 OMG
 
 rm -f /tmp/xxx.pass
 
+
+echo "Allow postgres password authentication"
+
+perl -pi -e 's|\x20ident|\x20md5|g' /var/lib/pgsql/data/pg_hba.conf
