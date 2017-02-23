@@ -1,6 +1,7 @@
 # Automation_NTI-310
 
 1) Server scripts are run on CentOS
+
 2) Client scripts are run on Ubuntu
 
 3) Use utility scripts as needed. NFS takes an IP as an argument. Python ldif creator is interactive.
