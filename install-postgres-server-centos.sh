@@ -30,25 +30,26 @@ echo "Enable and start postgres"
 systemctl enable postgresql
 systemctl start postgresql
 
-# Configure within postgres
-#echo "Entering postgress"
-#sudo -i -u postgres
-
 echo "Adding a fake user for postgres: test1/1password2"
 
 echo "CREATE DATABASE test1 ;
-CREATE USER test1 WITH PASSWORD '1password2'  ;
+CREATE USER test1 WITH PASSWORD '1password2';
 ALTER ROLE test1 SET client_encoding TO 'utf8';
 ALTER ROLE test1 SET default_transaction_isolation TO 'read committed';
 ALTER ROLE test1 SET timezone TO 'UTC';
-
 GRANT ALL PRIVILEGES ON DATABASE test1 TO test1;
 \q " > /tmp/addpostgres.sql  # Leave postgres db
 
-psql -U postgres -f /tmp/addpostgres.sql
+psql -h localhost -U postgres -f /tmp/addpostgres.sql
 
 exit # Leave postgres user
 
+echo "Clean up..."
+rm -f /tmp/addpostgres.sql
+
 echo "Allow postgres password authentication"
 
-perl -pi -e 's|\x20ident|\x20md5|g' /var/lib/pgsql/data/pg_hba.conf
+perl -pi -e 's|\x20trust|\x20md5|g' /var/lib/pgsql/data/pg_hba.conf
+systemctl restart postgresql
+echo "Resecured DB login"
+echo "****DONE****"
