@@ -21,7 +21,7 @@ def getServerList(servers,desktops):
         elif "server" in each:
             #print('server='+each) #DEBUG
             servers.append(each)
-        else each == '':
+        else:
             print "Extras: "+each+"\n"
     return servers
     return desktops
@@ -64,6 +64,7 @@ gcloudMachineString+=' --image-family '+imageType
 gcloudMachineString+=' --image-project '+projectName
 gcloudMachineString+=' --machine-type f1-micro'
 gcloudMachineString+=' --zone us-central1-c'
+gcloudMachineString+=' --metadata startup-script-url=gs://jv-nti310-startup/install-common-tools-generic.sh'
 print(gcloudMachineString)
 newServerResult=os.popen(gcloudMachineString).read()
 print(newServerResult)
