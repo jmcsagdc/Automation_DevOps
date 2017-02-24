@@ -32,23 +32,26 @@ echo "Enable and start postgres"
 systemctl enable postgresql
 systemctl start postgresql
 
-psql -h localhost -U postgres postgres <<OPP
- createdb test1 ;
-OPP
-
 # Configure within postgres
 #echo "Entering postgress"
 #sudo -i -u postgres
 
-echo "Adding a fake user for postgres: dave/1password2"
-echo "1password2" > /tmp/xxx.pass
+echo "Adding a fake user for postgres: test1/1password2"
 
-psql -h localhost -U postgres postgres <<OMG
- CREATE USER dave password '`cat /tmp/xxx.pass`' ;
-OMG
+echo "CREATEDB test1 ;
+CREATE USER test1 WITH PASSWORD '1password2'  ;
+ALTER ROLE test1 SET client_encoding TO 'utf8';
+ALTER ROLE test1 SET default_transaction_isolation TO 'read committed';
+ALTER ROLE test1 SET timezone TO 'UTC';
 
-rm -f /tmp/xxx.pass
+#give database user test1 access rights to the database test1
 
+GRANT ALL PRIVILEGES ON DATABASE test1 TO test1;
+\q " > /tmp/addpostgres.sql  # Leave postgres db
+
+psql -h localhost -U postgres -f /tmp/addpostgres.sql
+
+exit # Leave postgres user
 
 echo "Allow postgres password authentication"
 
