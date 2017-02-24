@@ -21,12 +21,10 @@ fi
 echo "Installing postgres server packages"
 yum install -y postgresql-server postgresql-contrib
 
+postgresql-setup initdb
 
 echo "Drop DB security for install..."
 perl -pi -e 's|\x20ident|\x20trust|g' /var/lib/pgsql/data/pg_hba.conf
-
-postgresql-setup initdb
-
 
 echo "Enable and start postgres"
 systemctl enable postgresql
