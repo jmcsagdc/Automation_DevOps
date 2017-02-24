@@ -36,18 +36,16 @@ systemctl start postgresql
 
 echo "Adding a fake user for postgres: test1/1password2"
 
-echo "CREATEDB test1 ;
+echo "CREATE DATABASE test1 ;
 CREATE USER test1 WITH PASSWORD '1password2'  ;
 ALTER ROLE test1 SET client_encoding TO 'utf8';
 ALTER ROLE test1 SET default_transaction_isolation TO 'read committed';
 ALTER ROLE test1 SET timezone TO 'UTC';
 
-#give database user test1 access rights to the database test1
-
 GRANT ALL PRIVILEGES ON DATABASE test1 TO test1;
 \q " > /tmp/addpostgres.sql  # Leave postgres db
 
-psql -h localhost -U postgres -f /tmp/addpostgres.sql
+psql -U postgres -f /tmp/addpostgres.sql
 
 exit # Leave postgres user
 
