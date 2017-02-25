@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo su
 myKernel=$(uname -r | grep 'generic')
 
