@@ -1,3 +1,4 @@
+sudo su
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
