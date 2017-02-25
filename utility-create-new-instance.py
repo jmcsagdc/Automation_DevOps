@@ -64,7 +64,7 @@ gcloudMachineString+=' --image-family '+imageType
 gcloudMachineString+=' --image-project '+projectName
 gcloudMachineString+=' --machine-type f1-micro'
 gcloudMachineString+=' --zone us-central1-c'
-gcloudMachineString+=' --metadata startup-script-url=gs://jv-nti310-startup/install-common-tools-generic.sh'
+gcloudMachineString+=' --metadata startup-script-url=https://storage.googleapis.com/jv-nti310-startup/install-common-tools-generic.sh'
 print(gcloudMachineString)
 newServerResult=os.popen(gcloudMachineString).read()
 print(newServerResult)
