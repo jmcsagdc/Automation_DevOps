@@ -2,7 +2,7 @@
 sudo su
 echo "git pull jv's automation tools" >> /root/INSTALL.LOG
 echo "cloning repo to /root/Automation"  >> /root/INSTALL.LOG
-git clone https://github.com/jmcsagdc/Automation_NTI-310.git /root/Automation
+git clone https://github.com/jmcsagdc/Automation_NTI-310.git /root/Automation  >> /root/INSTALL.LOG 2>&1
 
 myKernel=$(uname -r | grep 'generic')
 echo "myKernel is $myKernel"  >> /root/INSTALL.LOG
