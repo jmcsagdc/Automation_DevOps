@@ -1,44 +1,40 @@
 #!/bin/bash
 sudo su
-echo "git pull jv's automation tools" >> /root/INSTALL.LOG
-echo "cloning repo to /root/Automation"  >> /root/INSTALL.LOG
-git clone https://github.com/jmcsagdc/Automation_NTI-310.git /root/Automation  >> /root/INSTALL.LOG 2>&1
+
+if uname -r | grep 'generic' 1>/dev/null
+then
+  true # Ubuntu has git. Do nothing.
+else
+  yum install -y git
+  # Because the light install of CentOS doesn't have git.
+fi
+
+# Pull everything for next step
+echo "git clone jmcs automation tools to /root/Automation" >> /root/INSTALL.LOG
+git clone https://github.com/jmcsagdc/Automation_NTI-310.git \
+  /root/Automation  >> /root/INSTALL.LOG 2>&1
 
 myKernel=$(uname -r | grep 'generic')
 echo "myKernel is $myKernel"  >> /root/INSTALL.LOG
 
+cd /root/Automation
+chmod +x *
+
 if uname -r | grep 'generic' 1>/dev/null
 then
   # Ubuntu Desktop
-  chmod +x /root/Automation/*
-  chmod -x /root/Automation/*server*.sh
-  chmod -x /root/Automation/*centos*.sh
-  chmod -x /root/Automation/*.py
-  #./install-common-tools-ubuntu.sh >> /root/INSTALL.LOG 2>&1 # Use this
-  echo "Ubuntu OS is correct for Desktops" >> /root/INSTALL.LOG
-  echo "Installing tree utility" >> /root/INSTALL.LOG
-  apt install -y tree
-  echo "Installing htop utility" >> /root/INSTALL.LOG
-  apt install -y htop  
+  chmod -x *server*.sh
+  chmod -x *centos*.sh
+  ./install-common-tools-ubuntu.sh >> /root/INSTALL.LOG 2>&1
 else
   # CentOS Server
-  chmod +x /root/Automation/*
-  chmod -x /root/Automation/*ubuntu*.sh
-  chmod -x /root/Automation/*.py
-  echo "CentOS is correct for server"  >> /root/INSTALL.LOG
-  echo "Installing networking tools..." >> /root/INSTALL.LOG
-  yum install -y bind-utils
-  echo "Installing wget..." >> /root/INSTALL.LOG
-  yum install -y wget
-  echo "Installing nano text editor..." >> /root/INSTALL.LOG
-  yum install -y nano
-  echo "Installing net-tools for netstat..." >> /root/INSTALL.LOG
-  yum install -y net-tools
-  echo "Installing git version control..." >> /root/INSTALL.LOG
-  yum install -y git
-  echo "Installing locate tool..." >> /root/INSTALL.LOG
-  yum install -y mlocate
+  chmod -x *ubuntu*.sh
+  ./install-common-tools-centos.sh >> /root/INSTALL.LOG 2>&1
 fi
+
+chmod -x *.py
+chmod -x *.md
+
 #TODO Add log lines for everything
 #TODO Fix the chmods so they actually work
 #TODO Modularize this. The ifs should use your scripts, not replace them.
