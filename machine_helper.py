@@ -19,24 +19,24 @@ if '1' in myInstall:
 if '2' in myInstall:
     print 'I is LDAP'
     # LDAP Server
-    doInstall=os.popen('./install-ldap-server-centos.sh >> /root/Automation 2>&1')
-    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/Automation 2>&1')
+    doInstall=os.popen('./install-ldap-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 if '3' in myInstall:
     print 'I is NFS'
     # NFS Server
-    doInstall=os.popen('./install-nfs-server-centos.sh >> /root/Automation 2>&1')
+    doInstall=os.popen('./install-nfs-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     # ./utility-nfs-server-add-client-centos.sh # Change to subnet to do this
     doInstall=os.popen('touch /root/use-utility-nfs-server-add-client-centos.sh-now')
-    doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/Automation 2>&1')
-    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/Automation 2>&1')
+    doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 if '4' in myInstall:
     print 'I is Postgres'
     # Postgres Server
-    doInstall=os.popen('./install-postgres-server-centos.sh >> /root/Automation 2>&1')
-    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/Automation 2>&1')
+    doInstall=os.popen('./install-postgres-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 if '5' in myInstall:
     print 'I is Django'
     # Django and Apache server
-    doInstall=os.popen('./install-django-server-centos.sh >> /root/Automation 2>&1')
-    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/Automation 2>&1')
+    doInstall=os.popen('./install-django-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 print 'END!!!'
