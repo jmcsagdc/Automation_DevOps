@@ -30,9 +30,9 @@ yum install -y git
 echo "Installing locate tool..."
 yum install -y mlocate
 
-echo -n "git pull jv's automation tools [ENTER to cancel that]?"
-read pullRepoConfirmation
-if [ -n "$pullRepoConfirmation" ]; then
-    echo "cloning jmcsagdc/Automation_NTI-310 repo to /root/Automation"
-    git clone https://github.com/jmcsagdc/Automation_NTI-310.git /root/Automation
-fi
+#echo -n "git pull jv's automation tools [ENTER to cancel that]?"
+#read pullRepoConfirmation
+#if [ -n "$pullRepoConfirmation" ]; then
+#    echo "cloning jmcsagdc/Automation_NTI-310 repo to /root/Automation"
+#    git clone https://github.com/jmcsagdc/Automation_NTI-310.git /root/Automation
+#fi
