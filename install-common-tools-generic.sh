@@ -34,7 +34,3 @@ fi
 
 chmod -x *.py
 chmod -x *.md
-
-#TODO Add log lines for everything
-#TODO Fix the chmods so they actually work
-#TODO Modularize this. The ifs should use your scripts, not replace them.
