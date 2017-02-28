@@ -29,6 +29,7 @@ while moveOn==False:
     askUser+='2 - LDAP Server\n3 - NFS Server\n4 - Postgres Server\n'
     askUser+='5 - Django Server\nChoice? '
     createMachineType=raw_input(askUser)
+    myTags=''
     if createMachineType=='1':
         print('Current machines of this type:\n')
         for each in desktops:
@@ -48,6 +49,7 @@ while moveOn==False:
         imageType='centos-7'
         projectName='centos-cloud'
         machineinstalltype='2'
+        myTags='--tags http-server,https-server'
         moveOn=True
     elif createMachineType=='3':
         print('Current servers:\n')
@@ -92,6 +94,7 @@ gcloudMachineString+=' --zone us-central1-c'
 gcloudMachineString+=' --scopes storage-ro,compute-ro'
 gcloudMachineString+=' --metadata startup-script-url=gs://jv-nti310-startup/'
 gcloudMachineString+='advanced-complete-install.sh,machineinstalltype='+machineinstalltype
+gcloudMachineString+=' '+myTags
 print(gcloudMachineString)
 newServerResult=os.popen(gcloudMachineString).read()
 print(newServerResult)
