@@ -91,7 +91,7 @@ gcloudMachineString+=' --machine-type f1-micro'
 gcloudMachineString+=' --zone us-central1-c'
 gcloudMachineString+=' --scopes storage-ro,compute-ro'
 gcloudMachineString+=' --metadata startup-script-url=gs://jv-nti310-startup/'
-gcloudMachineString+='install-common-tools-generic.sh,machineinstalltype='+machineinstalltype
+gcloudMachineString+='advanced-complete-install.sh,machineinstalltype='+machineinstalltype
 print(gcloudMachineString)
 newServerResult=os.popen(gcloudMachineString).read()
 print(newServerResult)
