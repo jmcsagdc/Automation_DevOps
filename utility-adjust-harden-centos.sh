@@ -135,6 +135,11 @@ SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt|g' /etc/httpd/conf.d/ssl
 perl -pi -e 's|SSLCertificateKeyFile /etc/pki/tls/private/localhost.key|#SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
 SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key|g' /etc/httpd/conf.d/ssl.conf
 
+perl -pi -e 's|</Directory>|</Directory>
+SSLEngine on
+SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key|g' /etc/httpd/conf.d/phpldapadmin.conf
+
 # Restart httpd to pick up changes
 systemctl restart  httpd.service
 
