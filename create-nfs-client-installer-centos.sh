@@ -29,3 +29,4 @@ echo "echo \"`hostname`:/home   /var/nfs/home   nfs4    auto  0  0\" >> /etc/fst
 echo "echo \"`hostname`:/var/dev   /var/nfs/dev   nfs4    auto  0  0\" >> /etc/fstab" >> nfsclients_mount.sh
 echo "echo \"`hostname`:/var/config   /var/nfs/config   nfs4    auto  0  0\" >> /etc/fstab" >> nfsclients_mount.sh
 echo "Copy the file nfsclients_mount.sh to the client and run it there."
+cp nfsclients_mount.sh /var/nfs/home/.
