@@ -128,6 +128,12 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
 # (Should be installed this way. This makes sure.)
 perl -pi -e 's|\x2F\x2F \x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,true\x29\x3B|\x24servers\x2D\x3EsetValue\x28\x27login\x27,\x27anon_bind\x27,false\x29\x3B|g' /etc/phpldapadmin/config.php
 
+# Add ldaps:///
+sed -i 's/SLAPD_URLS="ldapi:\/\/\/ ldap:\/\/\/"/SLAPD_URLS=\"ldapi:\/\/\/ ldap:\/\/\/ ldaps:\/\/\/"/g' /etc/sysconfig/slapd
+
+# Restart slapd
+systemctl restart slapd
+
 # Point at apache cert and key for httpd
 perl -pi -e 's|SSLCertificateFile /etc/pki/tls/certs/localhost.crt|#SSLCertificateFile /etc/pki/tls/certs/localhost.crt
 SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt|g' /etc/httpd/conf.d/ssl.conf
