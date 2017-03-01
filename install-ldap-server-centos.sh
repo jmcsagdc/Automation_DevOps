@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sleep 5
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
@@ -266,7 +266,7 @@ systemctl restart slapd
 ps awxf | grep slapd
 echo "######################"
 
-
+sleep 5
 #configure firewall to allow access
 
 echo "Configuring the built-in firewall to allow access..."
