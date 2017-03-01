@@ -72,7 +72,7 @@ yum install -y mod_ssl
 echo "Creating and setting perms for /etc/ssl/private"
 mkdir /etc/ssl/private
 chmod 700 /etc/ssl/private
-
+sleep 10
 echo "This part is for Diffie-Hellman. It can take 5 minutes."
 echo "Current server time: `date`"
 
