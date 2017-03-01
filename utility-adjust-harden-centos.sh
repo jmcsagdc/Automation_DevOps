@@ -1,5 +1,5 @@
 myKernel=$(uname -r | grep 'generic')
-
+sleep 5
 echo 'myKernel is ' $myKernel
 
 if uname -r | grep 'generic' 1>/dev/null
@@ -24,7 +24,7 @@ echo "myglobalip = $myglobalip"
 myhostname=`hostname`
 
 echo "myhostname= $myhostname"
-
+sleep 5
 # First the local permissions
 echo "Back up sudoers"
 cp /etc/sudoers /etc/sudoers.orig
