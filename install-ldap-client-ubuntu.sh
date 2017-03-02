@@ -1,3 +1,6 @@
+echo "             Installing LDAP client"
+echo "*************************************************"
+echo "This script requires the user to input a hostname"
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
@@ -50,3 +53,6 @@ sed -i '$ a\session required    pam_mkhomedir.so skel=/etc/skel umask=0022' /etc
 # Restart the LDAP client service.
 echo "Restart nscd"
 /etc/init.d/nscd restart # Ubuntu
+
+echo "          Installing LDAP client: DONE"
+echo "*************************************************"
