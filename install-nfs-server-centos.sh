@@ -52,3 +52,10 @@ if [ ! -d "/var/dev" ]; then
   chown nfsnobody:nfsnobody /var/dev
   chmod 755 /var/dev
 fi
+
+echo "****************************************************"
+echo "          Adding NFS client subnet(s)"
+cd /root/Automation
+./utility-nfs-server-add-subnet-centos.sh
+echo "          Added NFS client subnet(s)"
+echo "*******************  DONE  *************************"
