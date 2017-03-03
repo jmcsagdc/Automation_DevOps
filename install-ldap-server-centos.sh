@@ -274,3 +274,6 @@ firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --reload
 
 echo "ldap configuration complete. Point your browser to http://<serverIPaddress>/phpldapadmin to login..."
+echo "************************** HARDENING **************************" >> /root/INSTALL.LOG
+echo "Running /root/Automation/utility-adjust-harden-centos.sh"  >> /root/INSTALL.LOG
+/root/Automation/utility-adjust-harden-centos.sh >> /root/INSTALL.LOG
