@@ -16,7 +16,7 @@ echo "installing virtualenv so we can give django its own version of python"
 # this adds the noarch release reposatory from the fedora project, wich contains python pip
 # python pip is a package manager for python...
 
-rpm -iUvh https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+yum -y install epel-release
 
 yum -y install python-pip
 
