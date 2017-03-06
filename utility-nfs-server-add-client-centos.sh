@@ -16,8 +16,8 @@ else
 fi
 
 IP=$1
-echo "/home             $IP(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-echo "echo \"/home   $IP(rw,sync,no_root_squash,no_subtree_check)\" >> /etc/exports"
+echo "/var/home             $IP(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "echo \"/var/home   $IP(rw,sync,no_root_squash,no_subtree_check)\" >> /etc/exports"
 echo "/var/dev              $IP(rw,sync,no_subtree_check)"                >> /etc/exports
 echo "echo \"/var/dev    $IP(rw,sync,no_subtree_check)\"                >> /etc/exports"
 echo "/var/config           $IP(rw,sync,no_subtree_check)"                >> /etc/exports
