@@ -12,9 +12,9 @@ else
   #exit 1
 fi
 
-echo "/var/nfsshare/home_dirs 10.128.0.0/8(rw,sync,no_all_squash)
-/var/nfsshare/devstuff  10.128.0.0/8(rw,sync,no_all_squash)
-/var/nfsshare/testing 10.128.0.0/8(rw,sync,no_all_squash)" >> /etc/exports
+echo "/var/home 10.128.0.0/8(rw,sync,no_all_squash)
+/var/dev  10.128.0.0/8(rw,sync,no_all_squash)
+/var/config 10.128.0.0/8(rw,sync,no_all_squash)" >> /etc/exports
 
 exportfs -a
 echo "exportfs -a"
