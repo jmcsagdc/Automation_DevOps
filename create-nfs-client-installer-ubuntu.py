@@ -15,7 +15,7 @@ for i in range(1, len(mySubnet_l)):
     count+=1
 myNfsServer=hostnameBase+mySubnet
 print myNfsServer
-
+pyRun=os.popen('echo "************* Creating /root/Automation/nfsclients_mount.sh *********************" >> /root/INSTALL.LOG 2>&1').read()
 # Create the nfsclients_mount.sh script
 outfile=open('nfsclients_mount.sh','w')
 outfile.write('''apt install -y nfs-common
@@ -33,3 +33,7 @@ outfile.write('echo "'+myNfsServer+':/home   /var/nfs/home   nfs4    auto  0  0"
 outfile.write('echo "'+myNfsServer+':/var/dev   /var/nfs/dev   nfs4    auto  0  0" >> /etc/fstab\n')
 outfile.write('echo "'+myNfsServer+':/var/config   /var/nfs/config   nfs4    auto  0  0" >> /etc/fstab\n')
 outfile.close()
+pyRun=os.popen('echo "************* Changing perms /root/Automation/nfsclients_mount.sh ************" >> /root/INSTALL.LOG 2>&1').read()
+pyRun=os.popen('chmod +x /root/Automation/nfsclients_mount.sh').read()
+pyRun=os.popen('echo "************* Running /root/Automation/nfsclients_mount.sh ************" >> /root/INSTALL.LOG 2>&1').read()
+pyRun=os.popen('/root/Automation/nfsclients_mount.sh').read()
