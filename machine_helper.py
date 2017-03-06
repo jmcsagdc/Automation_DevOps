@@ -30,8 +30,8 @@ if '3' in myInstall:
     doInstall=os.popen('echo "*** NFS *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-nfs-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     # ./utility-nfs-server-add-client-centos.sh # Change to subnet to do this
-    doInstall=os.popen('touch /root/use-utility-nfs-server-add-client-centos.sh-now')
-    doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/INSTALL.LOG 2>&1')
+    #doInstall=os.popen('touch /root/use-utility-nfs-server-add-client-centos.sh-now')
+    #doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 if '4' in myInstall:
     print 'Postgres'
