@@ -41,6 +41,12 @@ systemctl start nfs-server.service
 #systemctl enable rpcbind
 
 #make directories and adjust ownership and permissions
+if [ ! -d "/var/home" ]; then
+  mkdir /var/home
+  chown nfsnobody:nfsnobody /var/home
+  chmod 755 /var/home
+fi
+
 if [ ! -d "/var/config" ]; then
   mkdir /var/config
   chown nfsnobody:nfsnobody /var/config
