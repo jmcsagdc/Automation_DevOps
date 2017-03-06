@@ -1,6 +1,6 @@
 echo "             Installing LDAP client"
 echo "*************************************************"
-echo "This script requires the user to input a hostname"
+#echo "This script requires the user to input a hostname"
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
@@ -15,9 +15,13 @@ else
   exit 1
 fi
 # Get the server hostname
-echo "Please provide server hostname here:"
-read serverHostname
+#echo "Please provide server hostname here:"
+#read serverHostname
+serverHostname=$(python utility-update-ldap-client-installer.py)
+echo $serverHostname
+
 # Install the openldap client stuff
+
 
 echo "Go non-interactive for install"
 export DEBIAN_FRONTEND=noninteractive
