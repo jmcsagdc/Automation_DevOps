@@ -27,7 +27,7 @@ moveOn=False
 while moveOn==False:
     askUser='Which Type of machine to create?\n1 - Desktop\n'
     askUser+='2 - LDAP Server\n3 - NFS Server\n4 - Postgres Server\n'
-    askUser+='5 - Django Server\nChoice? '
+    askUser+='5 - Django Server\n6 - Plain\nChoice? '
     createMachineType=raw_input(askUser)
     myTags=''
     if createMachineType=='1':
@@ -83,8 +83,19 @@ while moveOn==False:
         machineinstalltype='5'
         myTags='--tags http-server,https-server'
         moveOn=True
+    elif createMachineType=='6':
+        print('Current servers:\n')
+        for each in servers:
+            print each
+        createMachineName=raw_input('\nWhat would you like the new machine to be called?\nserver-plain-')
+        createMachineName='server-plain-'+createMachineName
+        imageType='centos-7'
+        projectName='centos-cloud'
+        machineinstalltype='5'
+        myTags='--tags http-server,https-server'
+        moveOn=True
     else:
-        print('Please press only 1-5\n')
+        print('Please press only 1-6\n')
         moveOn=False
 # Build the create string for gcloud
 print('New machine name is '+createMachineName+'\n')
