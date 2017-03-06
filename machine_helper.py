@@ -15,8 +15,8 @@ if '1' in myInstall:
     doInstall=os.popen('echo "*** DESKTOP *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./utility-adjust-ssh-all-os.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./install-ldap-client-ubuntu.sh >> /root/INSTALL.LOG 2>&1')
-    doInstall=os.popen('touch /root/use-NFS-client-script-creator-on-server')
-    doInstall=os.popen('echo "****** USE NFS CREATOR SCRIPT ****************" >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python create-nfs-client-installer-ubuntu.py')
+    doInstall=os.popen('echo "****** USED Python NFS client installer ****************" >> /root/INSTALL.LOG 2>&1')
     # Figure out NFS client builder from CentOS server.
 if '2' in myInstall:
     print 'LDAP'
@@ -47,4 +47,9 @@ if '5' in myInstall:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-8000')
     doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 8000 ****************" >> /root/INSTALL.LOG 2>&1')
+if '6' in myInstall:
+    print 'Postgres'
+    # Postgres Server
+    doInstall=os.popen('echo "*** PLAIN *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 print 'END!!!'
