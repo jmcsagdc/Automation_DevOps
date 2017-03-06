@@ -70,6 +70,7 @@ while moveOn==False:
         imageType='centos-7'
         projectName='centos-cloud'
         machineinstalltype='4'
+        myTags='--tags http-server,https-server'
         moveOn=True
     elif createMachineType=='5':
         print('Current servers:\n')
@@ -80,6 +81,7 @@ while moveOn==False:
         imageType='centos-7'
         projectName='centos-cloud'
         machineinstalltype='5'
+        myTags='--tags http-server,https-server'
         moveOn=True
     else:
         print('Please press only 1-5\n')
