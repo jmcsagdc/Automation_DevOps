@@ -91,7 +91,7 @@ while moveOn==False:
         createMachineName='server-plain-'+createMachineName
         imageType='centos-7'
         projectName='centos-cloud'
-        machineinstalltype='5'
+        machineinstalltype='6'
         myTags='--tags http-server,https-server'
         moveOn=True
     else:
