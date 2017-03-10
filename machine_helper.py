@@ -23,7 +23,8 @@ if '2' in myInstall:
     # LDAP Server
     doInstall=os.popen('echo "*** LDAP *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-ldap-server-centos.sh >> /root/INSTALL.LOG 2>&1')
-    # hardening in the install script now
+    # LDAP hardening in the install script now
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 if '3' in myInstall:
     print 'NFS'
     # NFS Server
