@@ -33,7 +33,7 @@ outfile.write('echo "'+myNfsServer+':/var/home   /var/nfs/home   nfs4    auto  0
 outfile.write('echo "'+myNfsServer+':/var/dev   /var/nfs/dev   nfs4    auto  0  0" >> /etc/fstab\n')
 outfile.write('echo "'+myNfsServer+':/var/config   /var/nfs/config   nfs4    auto  0  0" >> /etc/fstab\n')
 outfile.close()
-pyRun=os.popen('sleep 5').read()
+pyRun=os.popen('sleep 60').read()
 pyRun=os.popen('echo "************* Changing perms /root/Automation/nfsclients_mount.sh ************" >> /root/INSTALL.LOG 2>&1').read()
 pyRun=os.popen('chmod +x /root/Automation/nfsclients_mount.sh').read()
 pyRun=os.popen('echo "************* Running /root/Automation/nfsclients_mount.sh ************" >> /root/INSTALL.LOG 2>&1').read()
