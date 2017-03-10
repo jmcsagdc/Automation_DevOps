@@ -67,14 +67,7 @@ for each in extras:
 askUser='Which network group name to create?'
 createNetworkName=raw_input(askUser)
 
-#desktop
-createMachineName=''
-createMachineName='desktop-'+createNetworkName
-imageType='ubuntu-1604-lts'
-projectName='ubuntu-os-cloud'
-machineinstalltype='1'
-myTags=''
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+# Move desktop to last
 
 #server-ldap
 createMachineName=''
@@ -110,4 +103,13 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='5'
 myTags='--tags http-server,https-server'
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+
+#desktop
+createMachineName=''
+createMachineName='desktop-'+createNetworkName
+imageType='ubuntu-1604-lts'
+projectName='ubuntu-os-cloud'
+machineinstalltype='1'
+myTags=''
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
