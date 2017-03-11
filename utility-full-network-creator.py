@@ -67,7 +67,18 @@ for each in extras:
 askUser='Which network group name to create?'
 createNetworkName=raw_input(askUser)
 
-# Move desktop to last
+# Moved desktop to last. It mounts locations that must exist.
+#TODO The order here is not numeric. Simply convenient. Find a better way.
+
+#TODO rsyslog had a server tag just as an experiment. Remove it or use it.
+#server-rsyslog
+createMachineName=''
+createMachineName='server-rsyslog-'+createNetworkName
+imageType='centos-7'
+projectName='centos-cloud'
+machineinstalltype='7'
+myTags='--tags rsyslog-server'
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
 
 #server-ldap
 createMachineName=''
