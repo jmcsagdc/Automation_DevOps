@@ -12,13 +12,13 @@ print myInstall
 if '1' in myInstall:
     print 'Desktop'
     # Client machine
-    doInstall=os.popen('echo "*** DESKTOP *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('echo "*** DESKTOP *** ">> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-ssh-all-os.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./install-ldap-client-ubuntu.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python create-nfs-client-installer-ubuntu.py')
     doInstall=os.popen('echo "****** USED Python NFS client installer ****************" >> /root/INSTALL.LOG 2>&1')
-    # doInstall=os.popen('reboot now') # Bad things happen with this line
-    # Figure out NFS client builder from CentOS server.
+    doInstall=os.popen('python create-syslog-client-installer-ubuntu.py')
+    doInstall=os.popen('echo "****** USED Python rsyslog client installer ************" >> /root/INSTALL.LOG 2>&1')
 if '2' in myInstall:
     print 'LDAP'
     # LDAP Server
@@ -50,8 +50,13 @@ if '5' in myInstall:
     doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-8000')
     doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 8000 ****************" >> /root/INSTALL.LOG 2>&1')
 if '6' in myInstall:
-    print 'Postgres'
+    print 'PLAIN'
     # Postgres Server
     doInstall=os.popen('echo "*** PLAIN *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+if '7' in myInstall:
+    print 'rsyslog'
+    # rsyslog Server
+    doInstall=os.popen('echo "*** rsyslog *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
 print 'END!!!'
