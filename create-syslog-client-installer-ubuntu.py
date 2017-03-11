@@ -17,7 +17,7 @@ myRsyslogServer=hostnameBase+mySubnet
 print myRsyslogServer
 
 outfile=open('rsyslogclients_mount.sh','w')
-outfile.write('echo "*.info;mail.none;authpriv.none;cron.none    @'+myRsyslogServer+'\n" >> /etc/rsyslog.conf')
+outfile.write('echo "*.info;mail.none;authpriv.none;cron.none    @'+myRsyslogServer+'" >> /etc/rsyslog.conf\n')
 outfile.write('service rsyslog restart\n')
 outfile.close()
 # Big sleep avoids race condition where client tries to mount a server not up yet.
