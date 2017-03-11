@@ -1,4 +1,9 @@
-# DEPRECATED
+#######################################################################
+#                               DEPRECATED                            #
+#######################################################################
+
+echo "You shouldn't be doing it this way now. The client takes care of the install."
+
 # Run this on NFS SERVER and scp the output file to the clients for now
 myKernel=$(uname -r | grep 'generic')
 echo "This is deprecated in favor of running the nfs 
