@@ -169,7 +169,7 @@ buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,my
 for i in range(1, int(createDesktopsQuantity)+1):
     #desktop
     createMachineName=''
-    createMachineName='desktop-'+createNetworkName+'-'+str(i)
+    createMachineName='desktop'+str(i)+'-'+createNetworkName
     imageType='ubuntu-1604-lts'
     projectName='ubuntu-os-cloud'
     machineinstalltype='1'
