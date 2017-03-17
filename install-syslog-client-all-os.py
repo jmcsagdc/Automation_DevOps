@@ -108,5 +108,11 @@ daemon.*;mail.*;\\
     *.=notice;*.=warn   |/dev/xconsole'''
 
 outfile.write(myConfigFile)
+pyRun=os.popen('firewall-cmd --permanent --add-port=514/tcp >> /root/INSTALL.LOG 2>&1').read()
+print pyRun
+pyRun=os.popen('firewall-cmd --permanent --add-port=514/udp >> /root/INSTALL.LOG 2>&1').read()
+print pyRun
+pyRun=os.popen('sudo firewall-cmd --reload >> /root/INSTALL.LOG 2>&1').read()
+print pyRun
 pyRun=os.popen('sleep 60').read()
 pyRun=os.popen('service rsyslog restart').read()
