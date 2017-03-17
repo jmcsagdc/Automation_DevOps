@@ -1,11 +1,20 @@
 import os
 
-#TODO Add the newer naming logic here and remove the below...
-
-
+myNetwork=''
+cloudAction='instances describe `hostname` '
+cloudRegion='--zone=us-central1-c'
+getMyNetwork=os.popen('gcloud compute '+cloudAction+cloudRegion).read()
+getMyNetwork_l=getMyNetwork.split('\n')
+for i in range(0, len(getMyNetwork_l)):
+    if 'myNetwork' in getMyNetwork_l[i]:
+        myNetwork=getMyNetwork_l[i+1]
+myNetwork_l=myNetwork.strip().split(':')
+myNetwork=myNetwork_l[1]
+myNetwork=myNetwork.strip()
+print myNetwork
 
 hostnameBase='server-rsyslog-' # Build base of rsyslog server hostname
-
+'''
 myHostname=os.popen('hostname').read()
 mySubnet=''
 count=0
@@ -18,6 +27,8 @@ for i in range(1, len(mySubnet_l)):
         mySubnet+='-'+mySubnet_l[i]
     count+=1
 myRsyslogServer=hostnameBase+mySubnet
+'''
+myRsyslogServer=hostnameBase+myNetwork
 print myRsyslogServer
 
 
@@ -34,13 +45,13 @@ myConfigFile='''
 #
 # First some standard log files.  Log by facility.
 #\n'''
-myConfigFile+='auth,authpriv.*         @server-rsyslog-bunch\n'
-myConfigFile+='*.*;auth,authpriv.none      @server-rsyslog-bunch\n'
+myConfigFile+='auth,authpriv.*         '+myRsyslogServer+'\n'
+myConfigFile+='*.*;auth,authpriv.none      '+myRsyslogServer+'\n'
 myConfigFile+='''#cron.*             /var/log/cron.log
 #daemon.*           -/var/log/daemon.log\n'''
-myConfigFile+='kern.*              @server-rsyslog.bunch\n'
+myConfigFile+='kern.*              '+myRsyslogServer+'\n'
 myConfigFile+='#lpr.*              -/var/log/lpr.log\n'
-myConfigFile+='mail.*              @server-rsyslog-bunch\n'
+myConfigFile+='mail.*              '+myRsyslogServer+'\n'
 myConfigFile+='''#user.*             -/var/log/user.log
 
 #
@@ -49,14 +60,14 @@ myConfigFile+='''#user.*             -/var/log/user.log
 #
 #mail.info          -/var/log/mail.info
 #mail.warn          -/var/log/mail.warn\n'''
-myConfigFile+='mail.err            @server-rsyslog-bunch\n'
+myConfigFile+='mail.err            '+myRsyslogServer+'\n'
 myConfigFile+='''\n
 #
 # Logging for INN news system.
 #\n'''
-myConfigFile+='news.crit           @server-rsyslog-bunch\n'
-myConfigFile+='news.err            @server-rsyslog-bunch\n'
-myConfigFile+='news.notice         @server-rsyslog-bunch\n'
+myConfigFile+='news.crit           '+myRsyslogServer+'\n'
+myConfigFile+='news.err            '+myRsyslogServer+'\n'
+myConfigFile+='news.notice         '+myRsyslogServer+'\n'
 myConfigFile+='''\n
 #
 # Some "catch-all" log files.
