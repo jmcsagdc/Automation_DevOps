@@ -59,7 +59,7 @@ print('Created installer for startup script')
 
 # Now for creating the machine strings
 
-def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags):
+def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags):
 
     print('New machine name is '+createMachineName+'\n') # Feedback to user
 
@@ -70,7 +70,7 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
     gcloudMachineString+=' --zone us-central1-c'
     gcloudMachineString+=' --scopes storage-ro,compute-ro'
     gcloudMachineString+=' --metadata-from-file startup-script=advanced-complete-install.sh'
-    gcloudMachineString+=' --metadata machineinstalltype='+machineinstalltype
+    gcloudMachineString+=' --metadata machineinstalltype='+machineinstalltype+',myNetwork='+myNetworkName
     gcloudMachineString+=' '+myTags
     print(gcloudMachineString) # Feedback to user
 
@@ -111,6 +111,7 @@ while moveOn==False:
     if createNetworkName in myServers:
         print 'Try again.'
     else:
+        myNetworkName=createNetworkName
         moveOn=True
 
 askUser='How many Desktops for users to create? '
@@ -128,7 +129,7 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='7'
 myTags=''
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 #server-ldap
 createMachineName=''
@@ -137,7 +138,7 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='2'
 myTags='--tags http-server,https-server'
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 # server-nfs
 createMachineName=''
@@ -146,7 +147,7 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='3'
 myTags=''
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 # server-sql
 createMachineName=''
@@ -155,7 +156,7 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='4'
 myTags='--tags http-server,https-server'
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 # Django
 createMachineName=''
@@ -164,7 +165,7 @@ imageType='centos-7'
 projectName='centos-cloud'
 machineinstalltype='5'
 myTags='--tags http-server,https-server'
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 for i in range(1, int(createDesktopsQuantity)+1):
     #desktop
@@ -174,4 +175,4 @@ for i in range(1, int(createDesktopsQuantity)+1):
     projectName='ubuntu-os-cloud'
     machineinstalltype='1'
     myTags=''
-    buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myTags)
+    buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
