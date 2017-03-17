@@ -45,13 +45,13 @@ myConfigFile='''
 #
 # First some standard log files.  Log by facility.
 #\n'''
-myConfigFile+='auth,authpriv.*         '+myRsyslogServer+'\n'
-myConfigFile+='*.*;auth,authpriv.none      '+myRsyslogServer+'\n'
+myConfigFile+='auth,authpriv.*         @'+myRsyslogServer+'\n'
+myConfigFile+='*.*;auth,authpriv.none      @'+myRsyslogServer+'\n'
 myConfigFile+='''#cron.*             /var/log/cron.log
 #daemon.*           -/var/log/daemon.log\n'''
-myConfigFile+='kern.*              '+myRsyslogServer+'\n'
+myConfigFile+='kern.*              @'+myRsyslogServer+'\n'
 myConfigFile+='#lpr.*              -/var/log/lpr.log\n'
-myConfigFile+='mail.*              '+myRsyslogServer+'\n'
+myConfigFile+='mail.*              @'+myRsyslogServer+'\n'
 myConfigFile+='''#user.*             -/var/log/user.log
 
 #
@@ -60,14 +60,14 @@ myConfigFile+='''#user.*             -/var/log/user.log
 #
 #mail.info          -/var/log/mail.info
 #mail.warn          -/var/log/mail.warn\n'''
-myConfigFile+='mail.err            '+myRsyslogServer+'\n'
+myConfigFile+='mail.err            @'+myRsyslogServer+'\n'
 myConfigFile+='''\n
 #
 # Logging for INN news system.
 #\n'''
-myConfigFile+='news.crit           '+myRsyslogServer+'\n'
-myConfigFile+='news.err            '+myRsyslogServer+'\n'
-myConfigFile+='news.notice         '+myRsyslogServer+'\n'
+myConfigFile+='news.crit           @'+myRsyslogServer+'\n'
+myConfigFile+='news.err            @'+myRsyslogServer+'\n'
+myConfigFile+='news.notice         @'+myRsyslogServer+'\n'
 myConfigFile+='''\n
 #
 # Some "catch-all" log files.
