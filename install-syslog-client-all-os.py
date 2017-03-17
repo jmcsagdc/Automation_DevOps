@@ -102,10 +102,10 @@ myConfigFile+='''\n
 # NOTE: adjust the list below, or you'll go crazy if you have a reasonably
 #      busy site..
 #
-daemon.*;mail.*;\\
-    news.err;\\
-    *.=debug;*.=info;\\
-    *.=notice;*.=warn   |/dev/xconsole'''
+#daemon.*;mail.*;\\
+#    news.err;\\
+#    *.=debug;*.=info;\\
+#    *.=notice;*.=warn   |/dev/xconsole'''
 
 outfile.write(myConfigFile)
 
