@@ -117,8 +117,8 @@ print pyRun
 pyRun=os.popen('sudo firewall-cmd --reload >> /root/INSTALL.LOG 2>&1').read()
 
 print('Sleeping a minute. No race conditions please.')
-pyRun=os.popen('sleep 60').read()
-pyRun=os.popen('/bin/systemctl restart  rsyslog.service').read()
+pyRun=os.popen('sleep 30').read()
+pyRun=os.popen('/bin/systemctl stop  rsyslog.service').read()
 
-print('Trying 2 rsyslog restarts since I have to do it manually after that last one sometimes.')
-pyRun=os.popen('/bin/systemctl restart  rsyslog.service').read()
+print('Trying rsyslog stop/starts since I have to do it manually after that last one sometimes.')
+pyRun=os.popen('/bin/systemctl start  rsyslog.service').read()
