@@ -17,7 +17,7 @@ if '1' in myInstall:
     doInstall=os.popen('./install-ldap-client-ubuntu.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python create-nfs-client-installer-ubuntu.py')
     doInstall=os.popen('echo "****** USED Python NFS client installer ****************" >> /root/INSTALL.LOG 2>&1')
-    doInstall=os.popen('python create-syslog-client-installer-ubuntu.py')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('echo "****** USED Python rsyslog client installer ************" >> /root/INSTALL.LOG 2>&1')
 if '2' in myInstall:
     print 'LDAP'
@@ -26,6 +26,7 @@ if '2' in myInstall:
     doInstall=os.popen('./install-ldap-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     # LDAP hardening in the install script now
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 if '3' in myInstall:
     print 'NFS'
     # NFS Server
@@ -35,12 +36,14 @@ if '3' in myInstall:
     #doInstall=os.popen('touch /root/use-utility-nfs-server-add-client-centos.sh-now')
     #doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 if '4' in myInstall:
     print 'Postgres'
     # Postgres Server
     doInstall=os.popen('echo "*** POSTGRES *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-postgres-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 if '5' in myInstall:
     print 'Django'
     # Django and Apache server
@@ -49,14 +52,17 @@ if '5' in myInstall:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-8000')
     doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 8000 ****************" >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 if '6' in myInstall:
     print 'PLAIN'
     # Postgres Server
     doInstall=os.popen('echo "*** PLAIN *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 if '7' in myInstall:
     print 'rsyslog'
     # rsyslog Server
     doInstall=os.popen('echo "*** rsyslog *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 print 'END!!!'
