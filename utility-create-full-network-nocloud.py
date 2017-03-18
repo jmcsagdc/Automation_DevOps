@@ -2,12 +2,11 @@
 #
 # Creates: 1 NFS Server
 #          1 LDAP Server
-#          1 Django Server
-#          1 Postgres Server
-#          1 Desktop
-#TODO Allows user to choose (1) Test, (2) Staging, (3) Production
+#          3 Django Server
+#          3 Postgres Server
+#          any number of Desktops
+#
 # Allows user to include something in the name to keep it all unique
-# --metadata-from-file startup-script=examples/scripts/install.sh
 # 
 
 print('Must be run from system with gcloud admin access')
@@ -149,23 +148,26 @@ machineinstalltype='3'
 myTags=''
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
-# server-sql
-createMachineName=''
-createMachineName='server-sql-'+createNetworkName
-imageType='centos-7'
-projectName='centos-cloud'
-machineinstalltype='4'
-myTags='--tags http-server,https-server'
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
+# 3 pairs...
 
-# Django
-createMachineName=''
-createMachineName='server-django-'+createNetworkName
-imageType='centos-7'
-projectName='centos-cloud'
-machineinstalltype='5'
-myTags='--tags http-server,https-server'
-buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
+for i in range(1, 4):
+    # Django
+    createMachineName=''
+    createMachineName='server-django'+str(i)+'-'+createNetworkName
+    imageType='centos-7'
+    projectName='centos-cloud'
+    machineinstalltype='5'
+    myTags='--tags http-server,https-server'
+    buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
+
+    # server-sql
+    createMachineName=''
+    createMachineName='server-sql'+str(i)+'-'+createNetworkName
+    imageType='centos-7'
+    projectName='centos-cloud'
+    machineinstalltype='4'
+    myTags='--tags http-server,https-server'
+    buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 for i in range(1, int(createDesktopsQuantity)+1):
     #desktop
