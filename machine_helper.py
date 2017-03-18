@@ -64,5 +64,5 @@ if '7' in myInstall:
     # rsyslog Server
     doInstall=os.popen('echo "*** rsyslog *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
-    doInstall=os.popen('python install-syslog-client-all-os.py')
+    # Don't fucking add the rsyslog client install here.
 print 'END!!!'
