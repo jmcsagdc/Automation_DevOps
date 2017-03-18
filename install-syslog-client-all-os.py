@@ -14,25 +14,12 @@ myNetwork=myNetwork.strip()
 print myNetwork
 
 hostnameBase='server-rsyslog-' # Build base of rsyslog server hostname
-'''
-myHostname=os.popen('hostname').read()
-mySubnet=''
-count=0
-mySubnet_l=myHostname.strip().split('-')
 
-for i in range(1, len(mySubnet_l)):
-    if count==0:
-        mySubnet+=mySubnet_l[i]
-    else:
-        mySubnet+='-'+mySubnet_l[i]
-    count+=1
-myRsyslogServer=hostnameBase+mySubnet
-'''
 myRsyslogServer=hostnameBase+myNetwork
 print myRsyslogServer
 
 
-myRsyslogConfig='/etc/rsyslog.d/50-default.conf'
+myRsyslogConfig='/etc/rsyslog.conf'
 outfile=open(myRsyslogConfig,'w')
 
 # Precooked config file
@@ -40,72 +27,67 @@ outfile=open(myRsyslogConfig,'w')
 myConfigFile='''
 #  Generated rules for rsyslog.
 #
-#  For more information see rsyslog.conf(5) and /etc/rsyslog.conf
+#  /etc/rsyslog.conf	Configuration file for rsyslog.
+#
+#			For more information see
+#			/usr/share/doc/rsyslog-doc/html/rsyslog_conf.html
+#
+#  Default logging rules can be found in /etc/rsyslog.d/50-default.conf
+
+
+#################
+#### MODULES ####
+#################
+
+module(load="imuxsock") # provides support for local system logging
+module(load="imklog")   # provides kernel logging support
+#module(load="immark")  # provides --MARK-- message capability
+
+# provides UDP syslog reception
+#module(load="imudp")
+#input(type="imudp" port="514")
+
+# provides TCP syslog reception
+#module(load="imtcp")
+#input(type="imtcp" port="514")
+
+# Enable non-kernel facility klog messages
+$KLogPermitNonKernelFacility on
+
+###########################
+#### GLOBAL DIRECTIVES ####
+###########################
 
 #
-# First some standard log files.  Log by facility.
-#\n'''
-myConfigFile+='auth,authpriv.*         @'+myRsyslogServer+'\n'
-myConfigFile+='*.*;auth,authpriv.none      @'+myRsyslogServer+'\n'
-myConfigFile+='''#cron.*             /var/log/cron.log
-#daemon.*           -/var/log/daemon.log\n'''
-myConfigFile+='kern.*              @'+myRsyslogServer+'\n'
-myConfigFile+='#lpr.*              -/var/log/lpr.log\n'
-myConfigFile+='mail.*              @'+myRsyslogServer+'\n'
-myConfigFile+='''#user.*             -/var/log/user.log
+# Use traditional timestamp format.
+# To enable high precision timestamps, comment out the following line.
+#
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# Filter duplicated messages
+$RepeatedMsgReduction on
 
 #
-# Logging for the mail system.  Split it up so that
-# it is easy to write scripts to parse these files.
+# Set the default permissions for all log files.
 #
-#mail.info          -/var/log/mail.info
-#mail.warn          -/var/log/mail.warn\n'''
-myConfigFile+='mail.err            @'+myRsyslogServer+'\n'
-myConfigFile+='''\n
-#
-# Logging for INN news system.
-#\n'''
-myConfigFile+='news.crit           @'+myRsyslogServer+'\n'
-myConfigFile+='news.err            @'+myRsyslogServer+'\n'
-myConfigFile+='news.notice         @'+myRsyslogServer+'\n'
-myConfigFile+='''\n
-#
-# Some "catch-all" log files.
-#
-#*.=debug;\
-#   auth,authpriv.none;\\
-#   news.none;mail.none -/var/log/debug
-#*.=info;*.=notice;*.=warn;\\
-#   auth,authpriv.none;\\
-#   cron,daemon.none;\\
-#   mail,news.none      -/var/log/messages
+$FileOwner syslog
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
 
 #
-# Emergencies are sent to everybody logged in.
+# Where to place spool and state files
 #
-*.emerg                                :omusrmsg:*
+$WorkDirectory /var/spool/rsyslog
 
 #
-# I like to have messages displayed on the console, but only on a virtual
-# console I usually leave idle.
+# Include all config files in /etc/rsyslog.d/
 #
-#daemon,mail.*;\\
-#   news.=crit;news.=err;news.=notice;\\
-#   *.=debug;*.=info;\\
-#   *.=notice;*.=warn   /dev/tty8
-
-# The named pipe /dev/xconsole is for the `xconsole' utility.  To use it,
-# you must invoke `xconsole' with the `-file' option:
-# 
-#    $ xconsole -file /dev/xconsole [...]
-#
-# NOTE: adjust the list below, or you'll go crazy if you have a reasonably
-#      busy site..
-#
-#daemon.*;mail.*;\\
-#    news.err;\\
-#    *.=debug;*.=info;\\
-#    *.=notice;*.=warn   |/dev/xconsole'''
+$IncludeConfig /etc/rsyslog.d/*.conf\n'''
+myConfigFile+='*.info;mail.none;authpriv.none;cron.none    @'+myRsyslogServer+':514\n'
 
 outfile.write(myConfigFile)
 
@@ -117,7 +99,7 @@ print pyRun
 pyRun=os.popen('sudo firewall-cmd --reload >> /root/INSTALL.LOG 2>&1').read()
 
 print('Sleeping a minute. No race conditions please.')
-pyRun=os.popen('sleep 30').read()
+pyRun=os.popen('sleep 10').read()
 pyRun=os.popen('/bin/systemctl stop  rsyslog.service').read()
 
 print('Trying rsyslog stop/starts since I have to do it manually after that last one sometimes.')
