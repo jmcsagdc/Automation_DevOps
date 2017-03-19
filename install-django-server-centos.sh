@@ -39,10 +39,10 @@ django-admin --version
 # FOLLOWING IS INTERACTIVE. HARDCODE FOR SIMPLE INSTALL #
 #########################################################
 # django project creation
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "What projectname for django would you like?"
-read projectname
-
+#echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+#echo "What projectname for django would you like?"
+#read projectname
+projectname="mycuteproject"
 django-admin startproject $projectname
 cd $projectname
 
