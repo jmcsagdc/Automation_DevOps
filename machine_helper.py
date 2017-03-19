@@ -17,7 +17,7 @@ if '1' in myInstall:
     doInstall=os.popen('./install-ldap-client-ubuntu.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python create-nfs-client-installer-ubuntu.py')
     doInstall=os.popen('echo "****** USED Python NFS client installer ****************" >> /root/INSTALL.LOG 2>&1')
-    doInstall=os.popen('python install-syslog-client-all-os.py')
+    doInstall=os.popen('python install-rsyslog-client-50-default-all-os.py')
     doInstall=os.popen('echo "****** USED Python rsyslog client installer ************" >> /root/INSTALL.LOG 2>&1')
 if '2' in myInstall:
     print 'LDAP'
