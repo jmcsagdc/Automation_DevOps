@@ -45,6 +45,14 @@ django-admin --version
 #echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 #echo "What projectname for django would you like?"
 #read projectname
+
+# Need a sleep I think. The script as-is never
+# creates the project on the following lines. Adding 60s
+
+echo "Sleeping 60s from `date`"
+sleep 60
+echo "Done sleeping. Try to add project."
+
 projectname="mycuteproject"
 django-admin startproject $projectname
 cd $projectname
