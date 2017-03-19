@@ -26,6 +26,9 @@ postgresql-setup initdb
 echo "Drop DB security for install..."
 perl -pi -e 's|\x20ident|\x20trust|g' /var/lib/pgsql/data/pg_hba.conf
 
+perl -pi -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
+perl -pi -e "s|\# IPv4 local connections:\n|\# IPv4 local connections:\n\$host    all             all             0.0.0.0/0      md5\n|g" /var/lib/pgsql/data/pg_hba.conf
+
 echo "Enable and start postgres"
 systemctl enable postgresql
 systemctl start postgresql
