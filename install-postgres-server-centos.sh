@@ -23,6 +23,9 @@ yum install -y postgresql-server postgresql-contrib
 
 postgresql-setup initdb
 
+# SE Linux allow httpd
+setsebool -P httpd_can_network_connect_db on
+
 echo "Drop DB security for install..."
 perl -pi -e 's|\x20ident|\x20trust|g' /var/lib/pgsql/data/pg_hba.conf
 
