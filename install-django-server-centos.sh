@@ -19,6 +19,8 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+server_ip_address=$(gcloud compute instances list | grep `hostname` | awk '{ print $5 }')
+
 echo "Adding epel-release for yum..."
 yum install epel-release
 yum -y update
@@ -55,12 +57,16 @@ python manage.py migrate
 # This is interactive. Need a scriptable solution
 python manage.py createsuperuser
 
-# Development style. Insecure.
-python manage.py runserver 0.0.0.0:8000
+# Add the allowed host line
+perl -pi -e 's|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \[$server_ip_address\]|g' mycuteproject/mycuteproject/settings.py
 
-server_ip_address=$(gcloud compute instances list | grep `hostname` | awk '{ print $5 }')
+echo "In a browser try to admin this setup: http://$server_ip_address:8000/admin"
+
+# Development style. Insecure.
+python manage.py runserver 0.0.0.0:8000 &
+
 # Verify it works
 echo "Verify django site:"
-curl $server_ip_address:8000
+curl $server_ip_address:8000 >> /root/INSTALL.LOG
 
-echo "In a browser try to admin this setup: $server_ip_address:8000/admin"
+
