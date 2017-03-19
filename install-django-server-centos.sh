@@ -58,7 +58,7 @@ python manage.py migrate
 python manage.py createsuperuser
 
 # Add the allowed host line
-perl -pi -e 's|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \[$server_ip_address\]|g' mycuteproject/mycuteproject/settings.py
+perl -pi -e 's|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \[\'$server_ip_address\'\]|g' mycuteproject/mycuteproject/settings.py
 
 echo "In a browser try to admin this setup: http://$server_ip_address:8000/admin"
 
