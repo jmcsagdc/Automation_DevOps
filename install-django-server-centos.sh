@@ -49,7 +49,7 @@ django-admin startproject $projectname
 cd $projectname
 
 # Add the allowed host line
-perl -pi -e "s|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \['$server_ip_address'\]|g" /root/mycuteproject/mycuteproject/settings.py
+perl -pi -e "s|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \['*'\]|g" /root/mycuteproject/mycuteproject/settings.py
 
 # Search and replace the settings.py
 echo "Search and replace the settings.py"
@@ -58,7 +58,8 @@ myNetwork=$(echo $djangoX | cut -d'-' -f3)
 djangoY=$(echo $djanoX | sed "s/[^[:digit:].-]//g")
 mySqlServer="server-sql$djangoY-$myNetwork"
 perl -pi -e 's|django.db.backends.sqlite3|django.db.backends.postgresql_psycopg2|g' /root/mycuteproject/mycuteproject/settings.py
-perl -pi -e "s|os.path.join(BASE_DIR, 'db.sqlite3')|'test1',\n        'USER': 'test1',\n        'PASSWORD': '1password2',\n        'HOST': 'localhost',\n        'PORT': '5432'|g" /root/mycuteproject/mycuteproject/settings.py
+perl -pi -e "s|os\x2Epath\x2Ejoin\x28BASE_DIR\x2C \x27db\x2Esqlite3\x27\x29|\x27test1\x27\x2C\n        \x27USER\x27\x3A \x27test1\x27\x2C\n        \x27PASSWORD\x27\x3A \x271password2\x27\x2C\n        \x27HOST\x27\x3A \x27$mySqlServer\x27\x2C\n        \x27PORT\x27\x3A \x275432\x27|g" /root/mycuteproject/mycuteproject/settings.py
+
 
 python manage.py makemigrations
 python manage.py migrate
