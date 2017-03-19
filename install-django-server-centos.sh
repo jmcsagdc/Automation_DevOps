@@ -1,3 +1,4 @@
+#!/bin/bash
 # CentOS only
 myKernel=$(uname -r | grep 'generic')
 
