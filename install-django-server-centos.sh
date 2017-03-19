@@ -60,13 +60,14 @@ mySqlServer="server-sql$djangoY-$myNetwork"
 perl -pi -e 's|django.db.backends.sqlite3|django.db.backends.postgresql_psycopg2|g' mycuteproject/mycuteproject/settings.py
 perl -pi -e "s|os.path.join(BASE_DIR, 'db.sqlite3')|'test1',\n        'USER': 'test1',\n        'PASSWORD': '1password2',\n        'HOST': 'localhost',\n        'PORT': '5432'|g" mycuteproject/mycuteproject/settings.py
 
+python manage.py makemigrations
+python manage.py migrate
+# If the above does not work, try this: python manage.py syncdb
+
 # This is interactive. Need a scriptable solution
 #python manage.py createsuperuser
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('jmcsagdc', 'user@test.com', 'blahblahblah')" | python manage.py shell
 
-python manage.py makemigrations
-python manage.py migrate
-# If the above does not work, try this: python manage.py syncdb
 
 echo "In a browser try to admin this setup: http://$server_ip_address:8000/admin"
 
