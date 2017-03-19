@@ -58,6 +58,7 @@ python manage.py createsuperuser
 # Development style. Insecure.
 python manage.py runserver 0.0.0.0:8000
 
+server_ip_address=$(gcloud compute instances list | grep `hostname` | awk '{ print $5 }')
 # Verify it works
 echo "Verify django site:"
 curl server_ip_address:8000
