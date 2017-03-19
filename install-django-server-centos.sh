@@ -60,6 +60,14 @@ python manage.py createsuperuser
 # Add the allowed host line
 perl -pi -e "s|ALLOWED_HOSTS = \[\]|ALLOWED_HOSTS = \['$server_ip_address'\]|g" mycuteproject/mycuteproject/settings.py
 
+djangoX=$HOSTNAME
+myNetwork=$(echo $djangoX | cut -d'-' -f3)
+djangoY=$(echo $djanoX | sed "s/[^[:digit:].-]//g")
+mySqlServer="server-sql$djangoY-$myNetwork"
+perl -pi -e 's|django.db.backends.sqlite3|django.db.backends.postgresql_psycopg2|g' mycuteproject/mycuteproject/settings.py
+perl -pi -e "s|os.path.join(BASE_DIR, 'db.sqlite3')|'test1',\n        'USER': 'test1',\n        'PASSWORD': '1password2',\n        'HOST': 'localhost',\n        'PORT': '5432'|g" mycuteproject/mycuteproject/settings.py
+
+
 echo "In a browser try to admin this setup: http://$server_ip_address:8000/admin"
 
 # Development style. Insecure.
