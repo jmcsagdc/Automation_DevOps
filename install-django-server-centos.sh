@@ -29,8 +29,8 @@ yum -y install python-pip
 echo "Here's your pip..."
 pip -V
 
-echo "Installing django..."
-pip install django
+echo "Installing django...and postgres connector"
+pip install django psycopg2
 
 echo "Here's your django global install..."
 django-admin --version
