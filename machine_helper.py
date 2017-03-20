@@ -48,7 +48,7 @@ if '5' in myInstall:
     print 'Django'
     # Django and Apache server
     doInstall=os.popen('echo "*** DJANGO and APACHE *** ">> /root/INSTALL.LOG')
-    doInstall=os.popen('source /install-django-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('source install-django-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-8000')
     doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 8000 ****************" >> /root/INSTALL.LOG 2>&1')
