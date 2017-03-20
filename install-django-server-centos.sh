@@ -55,7 +55,7 @@ echo "Done sleeping. Try to add project."
 
 projectname="mycuteproject"
 # django-admin startproject mycuteproject
-source django-admin startproject mycuteproject
+django-admin startproject mycuteproject
 cd $projectname
 
 # Add the allowed host line
