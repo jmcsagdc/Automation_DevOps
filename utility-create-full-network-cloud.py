@@ -1,3 +1,4 @@
+# DEPRECATED
 # Full network creator
 #
 # Creates: 1 NFS Server
