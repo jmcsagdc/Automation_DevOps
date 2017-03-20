@@ -10,7 +10,7 @@ def createGroupFile(groupFileName, gidNumber):
     # Make ldif content:
     groupFileContent=''
     groupFileContent+='dn: cn='+groupFileName
-    groupFileContent+=''',ou=groups,dc=jmcsagdc,dc=local
+    groupFileContent+=''',ou=Group,dc=jmcsagdc,dc=local
 objectClass: top
 objectClass: posixGroup\n'''
     groupFileContent+='gidNumber: '+gidNumber+'\n'
