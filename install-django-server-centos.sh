@@ -1,5 +1,7 @@
 #!/bin/bash
 # CentOS only
+sudo su
+echo "BEGIN *************************************** django install script"
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
