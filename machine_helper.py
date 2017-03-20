@@ -24,6 +24,8 @@ if '2' in myInstall:
     # LDAP Server
     doInstall=os.popen('echo "*** LDAP *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-ldap-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python utility-create-new-ldap-groups.py >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python utility-create-ldap-users-from-file.py >> /root/INSTALL.LOG 2>&1')
     # LDAP hardening in the install script now
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
