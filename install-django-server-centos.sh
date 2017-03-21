@@ -88,6 +88,8 @@ echo "In a browser try to admin this setup: http://$server_ip_address:8000/admin
 python /root/mycuteproject/manage.py runserver 0.0.0.0:8000 &
 
 # Verify it works
+echo "Sleep 10s"
+sleep 10
 echo "Verify django site:"
 curl $server_ip_address:8000 >> /root/INSTALL.LOG
 
