@@ -56,7 +56,7 @@ sleep 60
 echo "Done sleeping. Try to add project."
 
 projectname="mycuteproject"
-django-admin startproject mycuteproject
+exec django-admin startproject mycuteproject
 #python /usr/bin/django-admin.py startproject mycuteproject
 cd $projectname
 
