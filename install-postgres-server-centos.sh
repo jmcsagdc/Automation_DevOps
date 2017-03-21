@@ -49,7 +49,7 @@ GRANT ALL PRIVILEGES ON DATABASE test1 TO test1;
 
 psql -h localhost -U postgres -f /tmp/addpostgres.sql
 
-exit # Leave postgres user
+#exit # Leave postgres user
 
 echo "Clean up..."
 rm -f /tmp/addpostgres.sql
