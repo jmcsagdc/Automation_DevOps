@@ -30,7 +30,7 @@ server_ip_address=$(gcloud compute instances list | grep `hostname` | awk '{ pri
 
 echo "Adding epel-release for yum..."
 yum install epel-release
-yum -y update
+#yum -y update
 
 echo "Installing pip for python..."
 yum -y install python-pip
