@@ -19,7 +19,7 @@ myServers_l=[]
 
 # Full startup-script creator
 
-outfile=open('advanced-complete-install.sh','w')
+outfile=open('pre-install.sh','w')
 newScriptFile='''#!/bin/bash
 sudo su
 if uname -r | grep 'generic' 1>/dev/null
@@ -68,7 +68,7 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
     gcloudMachineString+=' --machine-type f1-micro'
     gcloudMachineString+=' --zone us-central1-c'
     gcloudMachineString+=' --scopes storage-ro,compute-ro'
-    gcloudMachineString+=' --metadata-from-file startup-script=advanced-complete-install.sh'
+    gcloudMachineString+=' --metadata-from-file startup-script=pre-install.sh'
     gcloudMachineString+=' --metadata machineinstalltype='+machineinstalltype+',myNetwork='+myNetworkName
     gcloudMachineString+=' '+myTags
     print(gcloudMachineString) # Feedback to user
