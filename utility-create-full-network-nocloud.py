@@ -121,29 +121,23 @@ if createDesktopsQuantity=='':
 # Moved desktop to last. It mounts locations that must exist.
 #TODO The order here is not numeric. Simply convenient. Find a better way.
 
-#server-rsyslog
-createMachineName=''
-createMachineName='server-rsyslog-'+createNetworkName
 imageType='centos-7'
 projectName='centos-cloud'
+
+#server-rsyslog
+createMachineName='server-rsyslog-'+createNetworkName
 machineinstalltype='7'
 myTags=''
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 #server-ldap
-createMachineName=''
 createMachineName='server-ldap-'+createNetworkName
-imageType='centos-7'
-projectName='centos-cloud'
 machineinstalltype='2'
 myTags='--tags http-server,https-server'
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 # server-nfs
-createMachineName=''
 createMachineName='server-nfs-'+createNetworkName
-imageType='centos-7'
-projectName='centos-cloud'
 machineinstalltype='3'
 myTags=''
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
@@ -152,29 +146,24 @@ buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,my
 
 for i in range(1, 4):
     # Django
-    createMachineName=''
     createMachineName='server-django'+str(i)+'-'+createNetworkName
-    imageType='centos-7'
-    projectName='centos-cloud'
     machineinstalltype='5'
     myTags='--tags http-server,https-server'
     buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
     # server-sql
-    createMachineName=''
     createMachineName='server-sql'+str(i)+'-'+createNetworkName
-    imageType='centos-7'
-    projectName='centos-cloud'
     machineinstalltype='4'
     myTags='--tags http-server,https-server'
     buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
+####### Desktops Below ########
+
+imageType='ubuntu-1604-lts'
+projectName='ubuntu-os-cloud'
+machineinstalltype='1'
+myTags=''
 for i in range(1, int(createDesktopsQuantity)+1):
     #desktop
-    createMachineName=''
     createMachineName='desktop'+str(i)+'-'+createNetworkName
-    imageType='ubuntu-1604-lts'
-    projectName='ubuntu-os-cloud'
-    machineinstalltype='1'
-    myTags=''
     buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
