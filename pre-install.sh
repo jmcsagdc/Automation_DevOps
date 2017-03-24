@@ -23,7 +23,6 @@ chmod +x *
 if uname -r | grep 'generic' 1>/dev/null
 then
   # Ubuntu Desktop
-  apt update
   chmod -x *server*.sh
   chmod -x *centos*.sh
   ./install-common-tools-ubuntu.sh >> /root/INSTALL.LOG 2>&1
