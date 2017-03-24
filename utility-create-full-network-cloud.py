@@ -20,7 +20,7 @@ myServers_l=[]
 
 # Full startup-script creator
 
-outfile=open('advanced-complete-install.sh','w')
+outfile=open('pre-install.sh','w')
 newScriptFile='''#!/bin/bash
 sudo su
 if uname -r | grep 'generic' 1>/dev/null
