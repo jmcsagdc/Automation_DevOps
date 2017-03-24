@@ -1,6 +1,10 @@
 echo "             Installing LDAP client"
 echo "*************************************************"
 #echo "This script requires the user to input a hostname"
+
+echo "Update apt-get"
+apt-get update
+
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
