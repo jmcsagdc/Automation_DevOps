@@ -44,19 +44,19 @@ systemctl start nfs-server.service
 if [ ! -d "/var/home" ]; then
   mkdir /var/home
   chown nfsnobody:nfsnobody /var/home
-  chmod 755 /var/home
+  chmod 777 /var/home
 fi
 
 if [ ! -d "/var/config" ]; then
   mkdir /var/config
   chown nfsnobody:nfsnobody /var/config
-  chmod 755 /var/config
+  chmod 777 /var/config
 fi
 
 if [ ! -d "/var/dev" ]; then
   mkdir /var/dev
   chown nfsnobody:nfsnobody /var/dev
-  chmod 755 /var/dev
+  chmod 777 /var/dev
 fi
 
 echo "****************************************************"
