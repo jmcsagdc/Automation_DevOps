@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#   **********    WARNING   ************
+echo "Only use this to preconfigure a server manually."
+echo "Note that the automation doesn't use this."
+
 sudo su
 
 if uname -r | grep 'generic' 1>/dev/null
