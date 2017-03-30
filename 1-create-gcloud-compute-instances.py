@@ -21,7 +21,7 @@ myServers_l=[]
 
 # Full startup-script creator
 
-outfile=open('advanced-complete-install.sh','w')
+outfile=open('2-advanced-complete-install.sh','w')
 newScriptFile='''#!/bin/bash
 sudo su
 if uname -r | grep 'generic' 1>/dev/null
@@ -52,7 +52,7 @@ else
 fi
 chmod -x *.py
 chmod -x *.md
-python machine_helper.py
+python 3-machine-helper.py
 '''
 outfile.write(newScriptFile)
 outfile.close()
@@ -70,7 +70,7 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
     gcloudMachineString+=' --machine-type f1-micro'
     gcloudMachineString+=' --zone us-central1-c'
     gcloudMachineString+=' --scopes storage-ro,compute-ro'
-    gcloudMachineString+=' --metadata-from-file startup-script=advanced-complete-install.sh'
+    gcloudMachineString+=' --metadata-from-file startup-script=2-advanced-complete-install.sh'
     gcloudMachineString+=' --metadata machineinstalltype='+machineinstalltype+',myNetwork='+myNetworkName
     gcloudMachineString+=' '+myTags
     print(gcloudMachineString) # Feedback to user
@@ -142,6 +142,12 @@ buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,my
 createMachineName='server-nfs-'+createNetworkName
 machineinstalltype='centos7nfs'
 myTags=''
+buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
+
+# server-plain
+createMachineName='server-plain-'+createNetworkName
+machineinstalltype='centos7plain'
+myTags='--tags http-server,https-server'
 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
 
 # 3 pairs...
