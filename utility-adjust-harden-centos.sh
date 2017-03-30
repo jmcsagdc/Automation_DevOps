@@ -41,3 +41,6 @@ perl -pi -e 's|\x25wheel|\x25adm|g' /etc/sudoers
 # Ports for NFS (if applicable)
 
 # 
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "              We are done here."
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
