@@ -1,15 +1,12 @@
-# Full network creator
+# Flexible network creator (INTERACTIVE)
 #
-# Creates: 1 NFS Server
-#          1 LDAP Server
-#          3 Django Server
-#          3 Postgres Server
-#          any number of Desktops
-#
-# Allows user to include something in the name to keep it all unique
-
-#TODO make each server a function
-#TODO make fully interactive for types and quantities
+# Creates any number of: NFS Server
+#                        LDAP Server
+#                        Django pairs (1 django, 1 sql on 2 VMs)
+#                        Postgres Server
+#                        Desktop (Ubuntu)
+#                        Plain Server
+# Allows user to name network to keep it all unique
 
 print('Must be run from system with gcloud admin access')
 
