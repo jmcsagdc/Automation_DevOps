@@ -6,6 +6,9 @@
 echo "yum installing gcc glibc glibc-common gd gd-devel make net-snmp openssl-devel xinetd unzip"
 yum install -y gcc glibc glibc-common gd \
                gd-devel make net-snmp openssl-devel xinetd unzip
+# PHP
+echo "installing php"
+yum -y install php
 
 # Apache
 
@@ -104,4 +107,40 @@ perl -pi -e "s|127.0.0.1|127.0.0.1 $LOCALIP|g" /etc/xinetd.d/nrpe
 echo "restart xinetd to pick up change"
 service xinetd restart
 
-echo "nagios is now installed. moving on to configuration"
+echo "nagios is now installed. moving on to configuration\n\n"
+echo "back up /usr/local/nagios/etc/nagios.cfg"
+cp /usr/local/nagios/etc/nagios.cfg /usr/local/nagios/etc/nagios.cfg.orig
+echo "modifying /usr/local/nagios/etc/nagios.cfg"
+perl -pi -e "s|#cfg_dir=/usr/local/nagios/etc/servers|cfg_dir=/usr/local/nagios/etc/servers|g" /usr/local/nagios/etc/nagios.cfg
+
+# create directory to store configuration for each server monitored:
+
+mkdir /usr/local/nagios/etc/servers
+
+echo "back up cp /usr/local/nagios/etc/objects/contacts.cfg to .orig"
+cp /usr/local/nagios/etc/objects/contacts.cfg /usr/local/nagios/etc/objects/contacts.cfg.orig
+
+echo "add your email to nagios contacts"
+perl -pi -e "s|nagios\x40localhost|jason.vernon\x40seattlecentral.edu|g" /usr/local/nagios/etc/objects/contacts.cfg
+
+echo "back up /usr/local/nagios/etc/objects/commands.cfg to .orig"
+cp /usr/local/nagios/etc/objects/commands.cfg /usr/local/nagios/etc/objects/commands.cfg.orig
+echo "add in a command to the end of the file"
+echo "define command{
+        command_name check_nrpe
+        command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+        }" >> /usr/local/nagios/etc/objects/commands.cfg
+
+# Apache
+echo "configure apache"
+
+htpasswd -cb /usr/local/nagios/etc/htpasswd.users nagiosadmin Passw0rd
+echo "Passw0rd" > /root/nagiosadmin_password
+chmod 600 /root/nagiosadmin_password
+
+echo "start nagios and restart httpd"
+systemctl start nagios.service
+systemctl restart httpd.service
+
+# Enable Nagios to start on boot
+chkconfig nagios on
