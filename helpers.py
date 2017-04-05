@@ -55,7 +55,7 @@ def GetCloudHostsData():
     # TODO: Make this a helper py for all scripts
     return myServerDict
 
-def GetMyNetworkName()
+def GetMyNetworkName():
     import os
 
     myHostname=os.popen('hostname').read()
