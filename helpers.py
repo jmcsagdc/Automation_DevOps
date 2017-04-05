@@ -54,3 +54,21 @@ def GetCloudHostsData():
 
     # TODO: Make this a helper py for all scripts
     return myServerDict
+
+def GetMyNetworkName()
+    import os
+
+    myHostname=os.popen('hostname').read()
+    mySubnet=''
+    count=0
+    mySubnet_l=myHostname.strip().split('-')
+
+    for i in range(2, len(mySubnet_l)):
+        if count==0:
+            mySubnet+=mySubnet_l[i]
+        else:
+            mySubnet+='-'+mySubnet_l[i]
+        count+=1
+    
+    print mySubnet
+    return mySubnet
