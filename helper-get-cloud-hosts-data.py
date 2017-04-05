@@ -31,8 +31,7 @@ def GetCloudHostsData():
     # print myData # DEBUG
 
     # Process my lines
-    for each in myData:
-        
+            
     names=[]
     local_ips=[]
 
