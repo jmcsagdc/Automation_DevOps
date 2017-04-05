@@ -44,7 +44,7 @@ def GetCloudHostsData():
 
     # Now print your lists of servers and ips
     for i in range(0, len(names)):
-        print 'name: '+names[i]+'         local_ip: '+local_ips[i]
+        print names[i]+':'+local_ips[i]
 
     # Want it in a dictionary?
 
