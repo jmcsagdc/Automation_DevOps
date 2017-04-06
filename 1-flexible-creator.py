@@ -122,7 +122,7 @@ while moveOn==False:
 
 
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios]
+systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios']
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
