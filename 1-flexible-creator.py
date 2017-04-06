@@ -6,7 +6,14 @@
 #                        Postgres Server
 #                        Desktop (Ubuntu)
 #                        Plain Server
+#                        Nagios Server
 # Allows user to name network to keep it all unique
+#
+# To add a server type to this, add to the systemTypes list
+# If you want it configured, it must be included in the machine_helper.py
+# If you add a system to this list, it will be 
+# configured with http/https access tags unles
+# you modify that in the IF below.
 
 print('Must be run from system with gcloud admin access')
 
@@ -115,7 +122,7 @@ while moveOn==False:
 
 
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog']
+systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios]
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
