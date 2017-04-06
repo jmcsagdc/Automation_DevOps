@@ -71,4 +71,4 @@ def GetMyNetworkName():
         count+=1
     
     print mySubnet
-    return mySubnet
+    return mySubnet, names, local_ips
