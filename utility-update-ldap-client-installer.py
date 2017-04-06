@@ -1,6 +1,7 @@
 import os
 
-hostnameBase='server-ldap-' # Build base of ldap server hostname
+hostnameBase='server-ldap1-' # Build base of ldap server hostname (BAD HARDCODE)
+#TODO: fix this to use helper and get valid ldap server name
 
 myHostname=os.popen('hostname').read()
 mySubnet=''
