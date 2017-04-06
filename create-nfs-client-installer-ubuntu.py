@@ -1,6 +1,7 @@
 import os
 
-hostnameBase='server-nfs-' # Build base of nfs server hostname
+hostnameBase='server-nfs1-' # Build base of nfs server hostname
+#TODO: Fix this to use helper file to get valid name without hardcoding
 
 myHostname=os.popen('hostname').read()
 mySubnet=''
