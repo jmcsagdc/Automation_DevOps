@@ -159,6 +159,7 @@ for each in systemTypes:
             # If there is a django, pair it with a SQL instance
             if each == 'django':
                 createMachineName='paired-sql'+str(i+1)+'-'+createNetworkName
+                machineinstalltype='centos7sql'
                 buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltype,myNetworkName,myTags)
     
     # If Zero, let user know there is nothing of that type to create
