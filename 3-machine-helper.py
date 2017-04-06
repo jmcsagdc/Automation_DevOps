@@ -62,4 +62,13 @@ if 'centos7syslog' in getMyType:
     doInstall=os.popen('echo "*** rsyslog *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     # DO DOT add the rsyslog client install here.
+if 'centos7nagios' in getMyType:
+    print 'Nagios'
+    # Nagios server
+    doInstall=os.popen('echo "*** NAGIOS *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('/root/Automation/install-nagios-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-5666')
+    doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 5666 ****************" >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
 print 'END!!!'
