@@ -92,7 +92,7 @@ echo "Search and replace the settings.py"
 djangoX=$HOSTNAME
 myNetwork=$(echo $djangoX | cut -d'-' -f3)
 djangoY=$(echo $djangoX | awk --field-separator '-' '{ print $2 }' | sed "s/[^[:digit:]]//g")
-mySqlServer="server-sql$djangoY-$myNetwork"
+mySqlServer="paired-sql$djangoY-$myNetwork"
 perl -pi -e 's|django.db.backends.sqlite3|django.db.backends.postgresql_psycopg2|g' /opt/django/mycuteproject/mycuteproject/settings.py
 perl -pi -e "s|os\x2Epath\x2Ejoin\x28BASE_DIR\x2C \x27db\x2Esqlite3\x27\x29|\x27test1\x27\x2C\n        \x27USER\x27\x3A \x27test1\x27\x2C\n        \x27PASSWORD\x27\x3A \x271password2\x27\x2C\n        \x27HOST\x27\x3A \x27$mySqlServer\x27\x2C\n        \x27PORT\x27\x3A \x275432\x27|g" /opt/django/mycuteproject/mycuteproject/settings.py
 
