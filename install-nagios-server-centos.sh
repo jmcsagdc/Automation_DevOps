@@ -138,9 +138,12 @@ htpasswd -cb /usr/local/nagios/etc/htpasswd.users nagiosadmin Passw0rd
 echo "Passw0rd" > /root/nagiosadmin_password
 chmod 600 /root/nagiosadmin_password
 
+# Enable Nagios to start on boot
+echo "chkconfig nagios on"
+chkconfig nagios on
+
 echo "start nagios and restart httpd"
 systemctl start nagios.service
 systemctl restart httpd.service
 
-# Enable Nagios to start on boot
-chkconfig nagios on
+echo "DONE!"
