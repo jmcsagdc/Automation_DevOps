@@ -41,4 +41,8 @@ myPath='tmpFiles/*'+myNetwork+'*'
 myCommand='cp '+myPath+' /usr/local/nagios/etc/servers/.'
 pyRun=os.popen(myCommand).read()
 print pyRun
-print 'END'
+
+echo "reloading nagios service: systemctl reload nagios.service"
+systemctl reload nagios.service
+
+echo "END!"
