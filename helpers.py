@@ -53,7 +53,7 @@ def GetCloudHostsData():
          myServerDict[names[x]] = local_ips[x]
 
     # TODO: Make this a helper py for all scripts
-    return myServerDict
+    return myServerDict, names, local_ips
 
 def GetMyNetworkName():
     import os
@@ -71,4 +71,4 @@ def GetMyNetworkName():
         count+=1
     
     print mySubnet
-    return mySubnet, names, local_ips
+    return mySubnet
