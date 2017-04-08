@@ -121,7 +121,7 @@ echo "back up cp /usr/local/nagios/etc/objects/contacts.cfg to .orig"
 cp /usr/local/nagios/etc/objects/contacts.cfg /usr/local/nagios/etc/objects/contacts.cfg.orig
 
 echo "add your email to nagios contacts"
-perl -pi -e "s|nagios\x40localhost|jasonmakescoolstuff\x40gmail.com|g" /usr/local/nagios/etc/objects/contacts.cfg
+perl -pi -e "s|nagios\x40localhost|jmcsagdc\x40gmail.com|g" /usr/local/nagios/etc/objects/contacts.cfg
 
 echo "back up /usr/local/nagios/etc/objects/commands.cfg to .orig"
 cp /usr/local/nagios/etc/objects/commands.cfg /usr/local/nagios/etc/objects/commands.cfg.orig
