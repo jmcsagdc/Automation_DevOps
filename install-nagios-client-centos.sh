@@ -14,7 +14,7 @@ echo "Find and replace in the allowed_hosts with private IP of Nagios server"
 
 perl -pi -e "s|allowed_hosts=127.0.0.1|allowed_hosts=127.0.0.1,$NAGIOSIP|g" /etc/nagios/nrpe.cfg
 
-echo "selinux: setenforce 0 before starting the nrpe service
+echo "selinux: setenforce 0 before starting the nrpe service"
 setenforce 0
 
 sudo systemctl enable nrpe.service
