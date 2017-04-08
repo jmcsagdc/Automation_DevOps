@@ -42,7 +42,9 @@ myCommand='cp '+myPath+' /usr/local/nagios/etc/servers/.'
 pyRun=os.popen(myCommand).read()
 print pyRun
 
-echo "reloading nagios service: systemctl reload nagios.service"
-systemctl reload nagios.service
+pyRun=os.popen('echo "reloading nagios service: systemctl reload nagios.service"').read()
+pyRun=os.popen('systemctl reload nagios.service').read()
 
-echo "END!"
+print pyRun
+
+print "END!"
