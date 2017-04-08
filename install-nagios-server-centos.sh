@@ -146,7 +146,7 @@ echo "start nagios and restart httpd"
 systemctl start nagios.service
 systemctl restart httpd.service
 
-echo"*********************************************************************************************
+echo "*********************************************************************************************
 NAGIOS email lists:
 https://lists.sourceforge.net/lists/listinfo/nagios-announce
 To post a message to all the list members, send email to nagios-announce@lists.sourceforge.net
