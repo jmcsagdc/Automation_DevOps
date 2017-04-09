@@ -80,3 +80,18 @@ echo "use admin:admin"
 echo "page reloads and demands you change the password"
 echo "enter admin, Passw0rd!, Passw0rd! and click to continue"
 echo "you get dropped into your UI at this point."
+
+echo "SNMP permissions"
+
+echo "Back up /etc/snmp/snmpd.conf as orig"
+cp /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.orig
+
+echo "Modify snmpd.conf"
+perl -pi -e "s|notConfigGroup|myGroup|g" /etc/snmp/snmpd.conf
+perl -pi -e "s|notConfigUser|myUser|g" /etc/snmp/snmpd.conf
+perl -pi -e "s|group have rights to:|group have rights to:\nview\tall\tincluded\t.1|g" /etc/snmp/snmpd.conf
+perl -pi -e "s|exact  systemview none none|exact  all all none|g" /etc/snmp/snmpd.conf
+
+echo "Enable and restart snmpd"
+systemctl enable snmpd.service
+systemctl restart snmpd.service
