@@ -81,6 +81,9 @@ echo "page reloads and demands you change the password"
 echo "enter admin, Passw0rd!, Passw0rd! and click to continue"
 echo "you get dropped into your UI at this point."
 
+echo "setenforce 0"
+setenforce 0
+
 echo "SNMP permissions"
 
 echo "Back up /etc/snmp/snmpd.conf as orig"
