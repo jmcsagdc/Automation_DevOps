@@ -38,7 +38,15 @@ quit;
 EOF
 
 echo "run cacti db script"
+# Yes, the no-space for password with its flag is appropriate.
 mysql -u root -pPassw0rd cacti < `rpm -ql cacti | grep cacti.sql`
+
+echo "Get the time zone set for DB"
+# Yes, the no-space for password with its flag is appropriate.
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pPassw0rd mysql
+
+echo "Back up /etc/cacti/db.php as orig"
+cp /etc/cacti/db.php /etc/cacti/db.php.orig
 
 echo "perform config file user substitutions"
 perl -pi -e "s|database_username = 'cactiuser'|database_username = 'root'|g" /etc/cacti/db.php
