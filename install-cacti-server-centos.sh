@@ -69,3 +69,6 @@ echo "Overwrite /etc/cron.d/cacti with desired polling time"
 echo '*/5 * * * *    cacti   /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1' > /etc/cron.d/cacti
 
 echo "MANUAL INSTALLING VIA WEBPAGES"
+echo "I clicked to ACCEPT, Next, Next, etc, then at the end"
+echo "selected Generic, Local, Net-SNMP since I have no"
+echo "Windows or Cisco in this test network"
