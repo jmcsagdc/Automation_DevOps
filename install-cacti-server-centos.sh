@@ -37,3 +37,6 @@ FLUSH privileges;
 quit;
 EOF
 
+echo "run cacti db script"
+mysql -u root -pPassw0rd cacti < `rpm -ql cacti | grep cacti.sql`
+
