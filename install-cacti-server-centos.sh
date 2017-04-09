@@ -40,3 +40,7 @@ EOF
 echo "run cacti db script"
 mysql -u root -pPassw0rd cacti < `rpm -ql cacti | grep cacti.sql`
 
+echo "perform config file user substitutions"
+perl -pi -e "s|database_username = 'cactiuser'|database_username = 'root'|g" /etc/cacti/db.php
+perl -pi -e "s|database_password = 'cactiuser'|database_password = 'Passw0rd'|g" /etc/cacti/db.php
+#TODO maybe change this to a different user
