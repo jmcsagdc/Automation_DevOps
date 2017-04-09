@@ -28,3 +28,12 @@ echo "Add mysql root user password ( see /root/mysql_root_pass )"
 mysqladmin -u root password Passw0rd
 echo "Passw0rd" >> /root/mysql_root_pass
 chmod 600 /root/mysql_root_pass
+
+echo "Create DB"
+mysql -u root -pPassw0rd << EOF
+CREATE DATABASE cacti ;
+GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'tecmint';
+FLUSH privileges;
+quit;
+EOF
+
