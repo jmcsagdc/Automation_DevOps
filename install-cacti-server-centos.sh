@@ -84,6 +84,11 @@ echo "you get dropped into your UI at this point."
 echo "setenforce 0"
 setenforce 0
 
+echo "Make your logs purgable for cacti"
+chown cacti.apache /var/log/cacti/ -R
+chmod 664 /var/log/cacti/cacti.log
+chcon -t httpd_sys_rw_content_t /var/log/cacti/ -R
+
 echo "SNMP permissions"
 
 echo "Back up /etc/snmp/snmpd.conf as orig"
