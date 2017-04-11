@@ -2,12 +2,12 @@ echo "installing net-snmp et al for cacti"
 
 yum install -y net-snmp net-snmp-utils net-snmp-libs
 
+echo "setenforce 0"
+setenforce 0
+
 echo "Start service snmpd"
 
 systemctl start snmpd.service
-
-echo "setenforce 0"
-setenforce 0
 
 echo "SNMP permissions"
 
