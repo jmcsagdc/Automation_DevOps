@@ -13,7 +13,7 @@ myNetwork=myNetwork_l[1]
 myNetwork=myNetwork.strip()
 print myNetwork
 
-hostnameBase='server-rsyslog-' # Build base of rsyslog server hostname
+hostnameBase='server-rsyslog1-' # Build base of rsyslog server hostname
 
 myRsyslogServer=hostnameBase+myNetwork
 print myRsyslogServer
@@ -98,7 +98,8 @@ pyRun=os.popen('firewall-cmd --permanent --add-port=514/udp >> /root/INSTALL.LOG
 print pyRun
 pyRun=os.popen('sudo firewall-cmd --reload >> /root/INSTALL.LOG 2>&1').read()
 
-print('Sleeping a minute. No race conditions please.')
+setenforce 0
+print('Sleeping a moment. No race conditions please.')
 pyRun=os.popen('sleep 10').read()
 pyRun=os.popen('/bin/systemctl stop  rsyslog.service').read()
 
