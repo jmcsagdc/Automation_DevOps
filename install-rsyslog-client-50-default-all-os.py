@@ -110,6 +110,7 @@ pyRun=os.popen('firewall-cmd --permanent --add-port=514/udp >> /root/INSTALL.LOG
 print pyRun
 pyRun=os.popen('sudo firewall-cmd --reload >> /root/INSTALL.LOG 2>&1').read()
 
+pyRun=os.popen('setenforce 0').read()
 print('Sleeping a minute. No race conditions please.')
 pyRun=os.popen('sleep 30').read()
 pyRun=os.popen('/bin/systemctl stop  rsyslog.service').read()
