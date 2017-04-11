@@ -13,7 +13,7 @@ myNetwork=myNetwork_l[1]
 myNetwork=myNetwork.strip()
 print myNetwork
 
-hostnameBase='server-rsyslog-' # Build base of rsyslog server hostname
+hostnameBase='server-rsyslog1-' # Build base of rsyslog server hostname
 '''
 myHostname=os.popen('hostname').read()
 mySubnet=''
