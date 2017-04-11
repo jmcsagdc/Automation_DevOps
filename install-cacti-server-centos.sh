@@ -84,6 +84,9 @@ echo "page reloads and demands you change the password"
 echo "enter admin, Passw0rd!, Passw0rd! and click to continue"
 echo "you get dropped into your UI at this point."
 
+echo "trying to fix rrd errors with some permissions..."
+chown -R cacti /usr/share/cacti/rra
+
 echo "setenforce 0"
 setenforce 0
 
