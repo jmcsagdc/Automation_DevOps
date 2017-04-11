@@ -45,6 +45,9 @@ echo "Get the time zone set for DB"
 # Yes, the no-space for password with its flag is appropriate.
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -pPassw0rd mysql
 
+echo "fix php.ini timezone issue"
+perl -pi -e "s|;date.timezone = |date.timezone = America/Vancouver|g" /etc/php.ini
+
 echo "Back up /etc/cacti/db.php as orig"
 cp /etc/cacti/db.php /etc/cacti/db.php.orig
 
