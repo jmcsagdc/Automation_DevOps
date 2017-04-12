@@ -120,3 +120,9 @@ echo "Verify by running snmpwalk"
 echo "snmpwalk -c myCommunity `/root/Automation/get_vm_ip.sh $HOSTNAME` -v1"
 
 echo "Moving on..."
+echo "*************************************************************************"
+echo "Mailing lists:                cacti-announce@lists.sourceforge.net"
+echo "                                 	cacti-user@lists.sourceforge.net"
+echo "*************************************************************************"
+
+echo "DONE!!"
