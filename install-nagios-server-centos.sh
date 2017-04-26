@@ -120,8 +120,37 @@ mkdir /usr/local/nagios/etc/servers
 echo "back up cp /usr/local/nagios/etc/objects/contacts.cfg to .orig"
 cp /usr/local/nagios/etc/objects/contacts.cfg /usr/local/nagios/etc/objects/contacts.cfg.orig
 
-echo "add your email to nagios contacts"
-perl -pi -e "s|nagios\x40localhost|jmcsagdc\x40gmail.com|g" /usr/local/nagios/etc/objects/contacts.cfg
+
+echo "add your email to nagios contacts and new contacts for group alerts and sms alerts"
+perl -pi -e "s|nagios\x40localhost|jmcsagdc\x40gmail.com
+define contact {
+    contact_name                    alert_priority                  ; For SMS alerts to football
+        use                         generic-contact                 ; Inherit from generic template above
+        alias                           alertpriority               ; Full name of user
+        email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
+          service_notification_period             24x7
+        service_notification_options            w,u,c,r,f,s         ; do NOT use n here
+        service_notification_commands           notify-service-by-email
+        host_notification_period                24x7
+        host_notification_options               d,u,r,f,s           ; do NOT use n here
+        host_notification_commands              notify-host-by-email
+        }
+
+define contact {
+    contact_name                    notify_priority    ; For email notifications
+        use                         generic-contact                 ; Inherit from generic template above
+        alias                           notifypriority              ; Full name of user
+        email                           team_email\x40company.net   ; Alias used for general monitor msgs
+          service_notification_period             24x7
+        service_notification_options            w,u,c,r,f,s         ; do NOT use n here
+        service_notification_commands           notify-service-by-email
+        host_notification_period                24x7                ; can be dialed back but users should adjust their mail settings instead
+        host_notification_options               d,u,r,f,s           ; do NOT use n here
+        host_notification_commands              notify-host-by-email
+        }
+|g" /usr/local/nagios/etc/objects/contacts.cfg
+
+
 
 echo "back up /usr/local/nagios/etc/objects/commands.cfg to .orig"
 cp /usr/local/nagios/etc/objects/commands.cfg /usr/local/nagios/etc/objects/commands.cfg.orig
