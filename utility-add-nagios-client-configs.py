@@ -17,9 +17,9 @@ for i in range(0, len(names)):
     myFile='''define host {
         use                             linux-server
         host_name                       '''+names[i]+'\n'
-    myFile+='''        alias                           My first postgres server
-        address                         '''+local_ips[i]+'\n'
-    myFile+= '''        max_check_attempts              5
+    myFile+='        alias                           My '+names[i]+' server\n'
+    myFile+='        address                         '+local_ips[i]+'\n'
+    myFile+='''        max_check_attempts              5
         check_period                    24x7
         notification_interval           30
         notification_period             24x7
