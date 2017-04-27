@@ -29,6 +29,8 @@ useradd nagios
 groupadd nagcmd
 usermod -a -G nagcmd nagios
 
+usermod -a -G nagcmd apache
+
 # Install nagios
 echo "curl the 4.2.0 nagios tarball"
 cd ~
