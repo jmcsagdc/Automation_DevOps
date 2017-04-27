@@ -34,7 +34,7 @@ define service {
 define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
-    myFile+= '''        Root Partition
+    myFile+= '''        service_description             Root Partition
         check_command                  check_nrpe!check_disk!20%!10%!/
 	contact_groups                 admins
         contacts                       alert_priority
