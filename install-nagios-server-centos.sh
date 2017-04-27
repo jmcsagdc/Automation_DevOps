@@ -113,6 +113,9 @@ cp /usr/local/nagios/etc/nagios.cfg /usr/local/nagios/etc/nagios.cfg.orig
 echo "modifying /usr/local/nagios/etc/nagios.cfg"
 perl -pi -e "s|#cfg_dir=/usr/local/nagios/etc/servers|cfg_dir=/usr/local/nagios/etc/servers|g" /usr/local/nagios/etc/nagios.cfg
 
+# make an indesx.html for the http checker
+touch /var/www/html/index.html
+
 # create directory to store configuration for each server monitored:
 
 mkdir /usr/local/nagios/etc/servers
