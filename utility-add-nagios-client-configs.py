@@ -35,9 +35,9 @@ define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        Root Partition
-        check_command			              check_nrpe!check_disk!20%!10%!/
-	    contact_groups			              admins,mediumpriority
-        contacts			                  alert_priority
+        check_command                  check_nrpe!check_disk!20%!10%!/
+	contact_groups                 admins
+        contacts                       alert_priority
 }'''
 
     outfileName='tmpFiles/'+names[i]+'.cfg'
