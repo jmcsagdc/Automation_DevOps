@@ -167,6 +167,9 @@ htpasswd -cb /usr/local/nagios/etc/htpasswd.users nagiosadmin Passw0rd
 echo "Passw0rd" > /root/nagiosadmin_password
 chmod 600 /root/nagiosadmin_password
 
+echo "fix permissions in nagios libs"
+chown nagios. /usr/local/nagios/libexec/*
+
 # Enable Nagios to start on boot
 echo "chkconfig nagios on"
 chkconfig nagios on
