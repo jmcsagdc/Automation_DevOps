@@ -72,6 +72,9 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
     gcloudMachineString+=' --image-family '+imageType
     gcloudMachineString+=' --image-project '+projectName
     gcloudMachineString+=' --machine-type f1-micro'
+    # Handle buildserver's disk requirement
+    if 'build' in createMachineName:
+        gcloudMachineString+=' --boot-disk-size "50" --verbosity error'
     gcloudMachineString+=' --zone us-central1-c'
     gcloudMachineString+=' --scopes storage-ro,compute-ro'
     gcloudMachineString+=' --metadata-from-file startup-script=2-pre-install.sh'
@@ -122,13 +125,13 @@ while moveOn==False:
 
 
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios']
+systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build']
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
 for each in systemTypes:
 
-    #If non-zero, createe a VM
+    #If non-zero, create a VM
     #print 'DEBUG:  '+str(systemQuantity[each])
     if systemQuantity[each] > 0:
 
