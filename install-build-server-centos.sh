@@ -21,6 +21,14 @@ yum groupinstall -y "Development Tools"
 # From RedHat (may be in rpm-build)
 yum install -y redhat-rpm-config
 
+# dependencies for various things
+
+# XML Lib
+yum install -y libxslt-devel
+
+# OggVorbis
+yum install -y libvorbis-devel
+
 echo "make and gcc should already be installed. confirm:"
 rpm -qa | grep make
 rpm -qa | grep gcc
