@@ -26,6 +26,7 @@ if 'centos7ldap' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7nfs' in getMyType:
     print 'NFS'
@@ -38,6 +39,7 @@ if 'centos7nfs' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7sql' in getMyType:
     print 'Postgres'
@@ -47,6 +49,7 @@ if 'centos7sql' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7django' in getMyType:
     print 'Django'
@@ -66,6 +69,7 @@ if 'centos7plain' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7syslog' in getMyType:
     print 'rsyslog'
@@ -74,6 +78,7 @@ if 'centos7syslog' in getMyType:
     doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     # DO DOT add the rsyslog client install here.
     doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7nagios' in getMyType:
     print 'Nagios'
@@ -85,6 +90,7 @@ if 'centos7nagios' in getMyType:
     doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 5666 ****************" >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('python utility-add-nagios-client-configs.py')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7build' in getMyType:
     print 'Build'
@@ -93,6 +99,8 @@ if 'centos7build' in getMyType:
     doInstall=os.popen('/root/Automation/install-build-server-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
+    doInstall=os.popen('./install-nagios-client-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 if 'centos7cacti' in getMyType:
     print 'Cacti'
@@ -102,6 +110,7 @@ if 'centos7cacti' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('python utility-add-nagios-client-configs.py')
+    doInstall=os.popen('./install-cacti-client-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('echo "*** Manual browser-based step required here *** ">> /root/INSTALL.LOG')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 print 'END!!!'
