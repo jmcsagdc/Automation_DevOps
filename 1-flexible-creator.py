@@ -7,13 +7,18 @@
 #                        Desktop (Ubuntu)
 #                        Plain Server
 #                        Nagios Server
-# Allows user to name network to keep it all unique
+#                        Build
+#                        Cacti
+# Allows user to name net cluster to keep it all unique
 #
 # To add a server type to this, add to the systemTypes list
+#
 # If you want it configured, it must be included in the machine_helper.py
-# If you add a system to this list, it will be 
-# configured with http/https access tags unles
-# you modify that in the IF below.
+#
+# If you add a system to this list, it will be configured
+# with http/https access tags unless you modify that in the IF below.
+
+# Servers requiring manual steps: Cacti (web)
 
 print('Must be run from system with gcloud admin access')
 
@@ -125,7 +130,7 @@ while moveOn==False:
 
 
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build']
+systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build','cacti']
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
@@ -138,7 +143,7 @@ for each in systemTypes:
         #For quantity
         for i in range(0, systemQuantity[each]):
 
-            # Handle ubuntu versus centos
+            # Handle ubuntu versus centos by examining 'each' server type systemQuantity name
             if each == 'desktop':
                 createMachineName='desktop'+str(i+1)+'-'+createNetworkName
                 machineinstalltype='ubuntudesktop'
@@ -150,7 +155,7 @@ for each in systemTypes:
                 imageType='centos-7'
                 projectName='centos-cloud'
 
-            # Handle webserver requirements
+            # Handle webserver requirements by excluding those that DO NOT need http
             if each in 'nfs desktop sql rsyslog':
                 myTags=''
             else:
