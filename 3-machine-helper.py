@@ -94,4 +94,14 @@ if 'centos7build' in getMyType:
     doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
     doInstall=os.popen('python install-syslog-client-all-os.py')
     doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
+if 'centos7cacti' in getMyType:
+    print 'Cacti'
+    # Cacti server
+    doInstall=os.popen('echo "*** CACTI *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('/root/Automation/install-cacti-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+    doInstall=os.popen('python install-syslog-client-all-os.py')
+    doInstall=os.popen('python utility-add-nagios-client-configs.py')
+    doInstall=os.popen('echo "*** Manual browser-based step required here *** ">> /root/INSTALL.LOG')
+    doInstall=os.popen('echo "*** End Helper *** ">> /root/INSTALL.LOG')
 print 'END!!!'
