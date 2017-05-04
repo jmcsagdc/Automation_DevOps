@@ -106,6 +106,10 @@ cp /etc/xinetd.d/nrpe /etc/xinetd.d/nrpe.orig
 echo "add in local IP of this server"
 perl -pi -e "s|127.0.0.1|127.0.0.1 $LOCALIP|g" /etc/xinetd.d/nrpe
 
+# Gimme debug logs please
+perl -pi -e 's|debug=0|debug=1|g' /etc/nagios/nrpe.cfg
+perl -pi -e 's|dont_blame_nrpe=0|dont_blame_nrpe=1|g' /etc/nagios/nrpe.cfg
+
 echo "restart xinetd to pick up change"
 service xinetd restart
 
