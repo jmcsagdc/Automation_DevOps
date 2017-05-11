@@ -35,11 +35,11 @@ check_automation_folder() {
     ls /root/Automation > test.txt 2>&1        # make a file to compare to thumbprint
     dave=$(diff test.txt fingerprint.txt)      # compare the files and get result
     if [[ $dave == *"cannot access"* ]]; then  # if result is a 'not found style' message
-      echo "ALERT: Missing"; return 2
+      echo "ALERT: Missing"; exit 2;
     else
       if [[ $dave == '' ]]; then               # if the result has nothing (good - no hits)
-        echo "GOOD: Match"; return 0
-      else echo "WARN: Partial"; return 1      # if result is not empty (meaning hits)
+        echo "GOOD: Match"; exit 0;
+      else echo "WARN: Partial"; exit 1;       # if result is not empty (meaning hits)
       fi
     fi
 }
