@@ -26,9 +26,11 @@ echo "Installing syslog server..."
 # Adjust rsyslog.conf: Port 514, listen for tcp, udp communication
 
 echo "imudp - Provides the ability to receive syslog messages via UDP"
+perl -pi -e s'|#module(load="imudp|module(load="imudp|g' /etc/rsyslog.conf
 perl -pi -e 's|\#\$ModLoad imudp|\$ModLoad imudp|g' /etc/rsyslog.conf
 
 echo "imtcp - Provides the ability to receive syslog messages via TCP"
+perl -pi -e s'|#module(load="imtcp|module(load="imtcp|g' /etc/rsyslog.conf
 perl -pi -e 's|\#\$ModLoad imtcp|\$ModLoad imtcp|g' /etc/rsyslog.conf
 
 echo "Set to run on port 514 for UDP and TCP"
