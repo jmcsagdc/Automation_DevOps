@@ -11,39 +11,23 @@
 #
 
 check_rsyslog_messages_appear() {
-    newlogline="check `date`"
+    newlogline="CHECKING `date`"
     logger $newlogline
-
+    #echo $newlogline
     sleep 5
 
     # Below we are returning error codes:
-    dave=$(grep $newlogline /var/log/messages)
-    if [[ $dave == $newlogline ]]; then  # this means line appeared                
-      echo "GOOD: Match"; exit 0;
+
+    fullLogLine=$(grep "$newlogline" /var/log/messages)
+    cleanLogLine=$(echo $fullLogLine | awk -F ": " '{ print $2 }')
+    #echo $cleanLogLine
+
+    if [[ $newlogline == $cleanLogLine ]]; then      # this means line appeared
+      echo "GOOD: Match [ $newlogline ] IS IN [ $fullLogLine ]"; exit 0;
     else
-      if [[ $dave == '' ]]; then         # if the result has nothing (BAD - no hits)
+      if [[ $cleanLogLine == '' ]]; then             # if the result has nothing (BAD - no hits)
         echo "BAD: No Match"; exit 2;
-      else echo "WARN: Partial"; exit 1;       # if result is not empty but isn't a hit? #TODO fix this. This is stupid
+      else echo "WARN: Uncaptured Plugin Result"; exit 1;  # Shouldn't really happen - exception 
       fi
     fi
 }
-
-#TODO: Fix. Detecting matches as partials because the log format contains more info
-
-#TEST:
-
-    newlogline="check `date`"
-    logger $newlogline
-    echo $newlogline
-    sleep 5
-
-    # Below we are returning error codes:
-    dave=$(grep "$newlogline" /var/log/messages)
-    if [[ $dave == $newlogline ]]; then  # this means line appeared
-      echo "GOOD: Match"; exit 0;
-    else
-      if [[ $dave == '' ]]; then         # if the result has nothing (BAD - no hits)
-        echo "BAD: No Match"; exit 2;
-      else echo "WARN: Partial: $dave"; exit 1;       # if result is not empty but isn't a hit? #TODO fix this. This is stupid
-      fi
-    fi
