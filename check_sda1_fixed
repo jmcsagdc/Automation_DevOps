@@ -1,0 +1,19 @@
+# On nagios server add in the server.cfg file:
+
+define service{
+        use                             generic-service
+        host_name                       server-plain1-test
+        service_description             SDA1
+        check_command                   check_sda1
+        contact_groups                  admins
+        contacts                        alert_priority
+}
+
+define command {
+       command_name     check_sda1
+       command_line     /usr/local/nagios/libexec/check_nrpe -H server-plain1-test -c check_sda1
+}
+
+# On NRPE client in the /etc/nagios/nrpe.cfg file in the COMMANDS section, add this line:
+
+command[check_sda1]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1
