@@ -25,6 +25,15 @@ for i in range(0, len(names)):
         notification_period             24x7
 }
 
+define command {
+       command_name     check_sda1
+       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_sda1
+}
+define command {
+       command_name     check_users
+       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_users
+}
+
 define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
@@ -35,9 +44,15 @@ define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        service_description             Root Partition
-        check_command                  check_nrpe!check_disk!20%!10%!/
-	contact_groups                 admins
+        check_command                  check_sda1
+    contact_groups                 admins
         contacts                       alert_priority
+}
+define service {
+        use                             generic-service
+        host_name                       '''+names[i]+'\n'
+    myFile+= '''        service_description             Users
+        check_command                  check_users
 }'''
 
     outfileName='tmpFiles/'+names[i]+'.cfg'
