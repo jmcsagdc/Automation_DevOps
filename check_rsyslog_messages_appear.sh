@@ -1,5 +1,5 @@
 # Add to nrpe.cfg:
-# command[check_rsyslog_messages_appear]=/usr/lib64/nagios/plugins/check_rsyslog_messages_appear
+# command[check_rsyslog_messages_appear]=/usr/lib64/nagios/plugins/check_rsyslog_messages_appear.sh
 #
 # Here's the thing to check for
 # newlogline="check `date`"    
