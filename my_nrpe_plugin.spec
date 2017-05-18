@@ -1,6 +1,6 @@
 Name:           my_nrpe_plugin
 Version:        0.1
-Release:        2
+Release:        3
 Summary:        A new plugin for nrpe
 
 Group:          Applications
@@ -34,7 +34,7 @@ cp /root/my_plugin/* %buildroot/tmp/my_plugin
 chmod +x /tmp/my_plugin/*
 mv /tmp/my_plugin/* /usr/lib64/nagios/plugins/.
 echo "this worked: `date`  ~  here's where I'd echo that command in..." >> /root/my_plugins_log
-perl -pi -e 's|command[check_users]=/usr/lib64/nagios/plugins/check_users -w 5 -c 10|command[check_users]=/usr/lib64/nagios/plugins/check_users -w 5 -c 10
-command[check_process]=/usr/lib64/nagios/plugins/check_process crond|g' /etc/nagios/nrpe.cfg
+echo >>	/etc/nagios/nrpe.cfg
+echo 'command[check_process]=/usr/lib64/nagios/plugins/check_process.sh crond' >> /etc/nagios/nrpe.cfg
 
 %changelog
