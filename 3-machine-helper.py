@@ -72,4 +72,5 @@ if os.path.isfile(myPath) is False:
     print 'END!!!'
     pyRun=os.popen('touch /root/delete-to-reimage-on-boot')
 else:
+    doInstall=os.popen('echo "*** reboot `date` *** ">> /root/delete-to-reimage-on-boot')
     pass
