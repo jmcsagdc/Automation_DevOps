@@ -33,36 +33,42 @@ myServers_l=[]
 outfile=open('2-pre-install.sh','w')
 newScriptFile='''#!/bin/bash
 sudo su
-if uname -r | grep 'generic' 1>/dev/null
-then
-  true # Ubuntu has git. Do nothing.
+fileTest="/root/delete-to-reimage-on-boot"
+if [ -e "$fileTest" ]; then
+  echo "*** reboot `date` *** ">> /root/delete-to-reimage-on-boot
 else
-  yum install -y git
-  # Because the light install of CentOS doesn't have git.
+  if uname -r | grep 'generic' 1>/dev/null
+  then
+    true # Ubuntu has git. Do nothing.
+  else
+    yum install -y git
+    # Because the light install of CentOS doesn't have git.
+  fi
+  # Pull everything for next step
+  echo "git clone jmcs automation tools to /root/Automation" >> /root/INSTALL.LOG
+  git clone https://github.com/jmcsagdc/Automation_NTI-310.git \\
+    /root/Automation  >> /root/INSTALL.LOG 2>&1
+  myKernel=$(uname -r | grep 'generic')
+  echo "myKernel is $myKernel"  >> /root/INSTALL.LOG
+  cd /root/Automation
+  chmod +x *
+  if uname -r | grep 'generic' 1>/dev/null
+  then
+    # Ubuntu Desktop
+    chmod -x *server*.sh
+    chmod -x *centos*.sh
+    ./install-common-tools-ubuntu.sh >> /root/INSTALL.LOG 2>&1
+  else
+    # CentOS Server
+    chmod -x *ubuntu*.sh
+    ./install-common-tools-centos.sh >> /root/INSTALL.LOG 2>&1
+  fi
+  chmod -x *.py
+  chmod -x *.md
+  python 3-machine-helper.py
 fi
-# Pull everything for next step
-echo "git clone jmcs automation tools to /root/Automation" >> /root/INSTALL.LOG
-git clone https://github.com/jmcsagdc/Automation_NTI-310.git \\
-  /root/Automation  >> /root/INSTALL.LOG 2>&1
-myKernel=$(uname -r | grep 'generic')
-echo "myKernel is $myKernel"  >> /root/INSTALL.LOG
-cd /root/Automation
-chmod +x *
-if uname -r | grep 'generic' 1>/dev/null
-then
-  # Ubuntu Desktop
-  chmod -x *server*.sh
-  chmod -x *centos*.sh
-  ./install-common-tools-ubuntu.sh >> /root/INSTALL.LOG 2>&1
-else
-  # CentOS Server
-  chmod -x *ubuntu*.sh
-  ./install-common-tools-centos.sh >> /root/INSTALL.LOG 2>&1
-fi
-chmod -x *.py
-chmod -x *.md
-python 3-machine-helper.py
 '''
+
 outfile.write(newScriptFile)
 outfile.close()
 print('Created installer for startup script')
