@@ -133,20 +133,34 @@ cp /usr/local/nagios/etc/objects/contacts.cfg /usr/local/nagios/etc/objects/cont
 echo "add your email to nagios contacts and new contacts for group alerts and sms alerts"
 perl -pi -e "s|nagios\x40localhost|jmcsagdc\x40gmail.com
 define contact {
-    contact_name                    alert_priority                  ; For SMS alerts to football
+    contact_name                    high_priority                  ; For sms to duty phone
+        use                         generic-contact                 ; Inherit from generic template above
+        alias                           alertpriority               ; Full name of user
+        email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
+        phone                           12062223333                 ; The phone number for the pager
+          service_notification_period             24x7
+        service_notification_options            w,u,c,r,f,s         ; do NOT use n here
+        service_notification_commands           notify-service-by-pager
+        host_notification_period                24x7
+        host_notification_options               d,u,r,f,s           ; do NOT use n here
+        host_notification_commands              notify-host-by-pager
+        }
+
+define contact {
+    contact_name                    medium_priority                  ; For sms alerts to phone
         use                         generic-contact                 ; Inherit from generic template above
         alias                           alertpriority               ; Full name of user
         email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
           service_notification_period             24x7
         service_notification_options            w,u,c,r,f,s         ; do NOT use n here
-        service_notification_commands           notify-service-by-email
+        service_notification_commands           notify-service-by-email ; Inherit from slim email template
         host_notification_period                24x7
         host_notification_options               d,u,r,f,s           ; do NOT use n here
-        host_notification_commands              notify-host-by-email
+        host_notification_commands              notify-host-by-email ; Inherit from slim email template
         }
 
 define contact {
-    contact_name                    notify_priority    ; For email notifications
+    contact_name                    low_priority    ; For email notifications
         use                         generic-contact                 ; Inherit from generic template above
         alias                           notifypriority              ; Full name of user
         email                           team_email\x40company.net   ; Alias used for general monitor msgs
