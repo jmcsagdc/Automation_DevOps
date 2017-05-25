@@ -153,10 +153,10 @@ define contact {
         email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
           service_notification_period             24x7
         service_notification_options            w,u,c,r,f,s         ; do NOT use n here
-        service_notification_commands           notify-service-by-email ; Inherit from slim email template
+        service_notification_commands           notify-service-by-sms ; Inherit from slim email template
         host_notification_period                24x7
         host_notification_options               d,u,r,f,s           ; do NOT use n here
-        host_notification_commands              notify-host-by-email ; Inherit from slim email template
+        host_notification_commands              notify-host-by-sms ; Inherit from slim email template
         }
 
 define contact {
@@ -181,7 +181,19 @@ echo "add in a command to the end of the file"
 echo "define command{
         command_name check_nrpe
         command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
-        }" >> /usr/local/nagios/etc/objects/commands.cfg
+        }
+# 'notify-service-by-sms' command definition
+define command{
+command_name notify-service-by-sms
+command_line /usr/bin/print '*** Nagios Alert*** $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$1' | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$
+}
+
+# 'notify-host-by-sms' command definition
+define command{
+command_name notify-host-by-sms
+command_line /usr/bin/printf '*** Nagios Alert*** $NOTIFICATIONTYPE$ : Host $HOSTALIAS$ is $HOSTSTATE$' | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$
+}
+" >> /usr/local/nagios/etc/objects/commands.cfg
 
 # Apache
 echo "configure apache"
