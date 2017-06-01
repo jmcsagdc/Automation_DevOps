@@ -6,15 +6,12 @@ nicNagiosFile=open(nicNagiosScript,'w')
 
 scriptContents='''
 #!/bin/bash
-
 host="$1" # get these from python's call to this script
 ip="$2"
-
 # Modified by jmcsagdc just to remove the
 # error-checking and usage since this will go to 
 # a wrapper for execution. The wrapper is likely
 # just a call from the flexible-creator.py
-
 echo "
 # Host Definition
 define host {
@@ -64,7 +61,7 @@ nagiosScpList=[]
 # GET the nagiosServerList This can go up top.
 for aServer in servers:
     if 'server-nagios' in aServer:
-	nagiosServerList.append(aServer)
+    nagiosServerList.append(aServer)
 
 
 ################################################################################
@@ -80,7 +77,7 @@ pyNagiosCreateString='nic-nagios-script.sh '+createMachineName+' '+newIP
 pyRun=os.popen(pyNagiosCreateString).read()
 
 # add this server to the queue to scp soon
-scpListLine=' '+createMachineName
+scpListLine='GCLOUD SCP COMMAND HERE '+nagiosServer
 nagiosScpList.append(scpListLine)
 
 # At this point all instances are being created, one at a time. SCP after.
