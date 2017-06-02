@@ -78,7 +78,7 @@ pyRun=os.popen(pyNagiosCreateString).read()
 
 # add this server to the queue to scp soon
 for destinationServer in nagiosServerList:
-    scpListLine='GCLOUD SCP COMMAND HERE'+createMachineName'.cfg ##USER##@'+destinationServer
+    scpListLine='gcloud compute scp /tmp/'+createMachineName'.cfg '+destinationServer':/tmp/'
     nagiosScpList.append(scpListLine)
 
 # At this point all instances are being created, one at a time. SCP after.
@@ -88,5 +88,7 @@ for destinationServer in nagiosServerList:
 # Likely, we'd want more than one monitoring station and this is just easier
 
 for each in nagiosScpList:
-    pyRun=os.popen(scpListLine).read() # scp the file to the server
-    print pyRun
+    pyRun=os.popen(scpListLine).read() # execute each scp in list.
+    print pyRun # return result to console and move on to next
+                # scp action for this Nagios server. This way, 
+                # each server receives full scp list of files
