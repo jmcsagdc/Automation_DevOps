@@ -77,15 +77,16 @@ pyNagiosCreateString='nic-nagios-script.sh '+createMachineName+' '+newIP
 pyRun=os.popen(pyNagiosCreateString).read()
 
 # add this server to the queue to scp soon
-scpListLine='GCLOUD SCP COMMAND HERE '+nagiosServer
-nagiosScpList.append(scpListLine)
+for destinationServer in nagiosServerList:
+    scpListLine='GCLOUD SCP COMMAND HERE'+createMachineName'.cfg ##USER##@'+destinationServer
+    nagiosScpList.append(scpListLine)
 
 # At this point all instances are being created, one at a time. SCP after.
 ################################################################################
 
 # SCP cfg files to all Nagios servers. This goes down at the end.
 # Likely, we'd want more than one monitoring station and this is just easier
-for nagiosServer in nagiosServerList:
-    for each in nagiosScpList:
-        pyRun=os.popen(scpListLine).read() # scp the file to the server
-        print pyRun
+
+for each in nagiosScpList:
+    pyRun=os.popen(scpListLine).read() # scp the file to the server
+    print pyRun
