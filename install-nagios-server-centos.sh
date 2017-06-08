@@ -147,28 +147,28 @@ define contact {
         }
 
 define contact {
-    contact_name                    medium_priority                  ; For sms alerts to phone
-        use                         generic-contact                 ; Inherit from generic template above
-        alias                           alertpriority               ; Full name of user
-        email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
-          service_notification_period             24x7
-        service_notification_options            w,u,c,r,f,s         ; do NOT use n here
-        service_notification_commands           notify-service-by-sms ; Inherit from slim email template
+    contact_name                                medium_priority                  ; For sms alerts to phone
+        use                                     generic-contact                  ; Inherit from generic template above
+        alias                                   alertpriority                    ; Full name of user
+        email                                   PHONENUMBER\x40tmobile.net       ; The sms forwarder appropriate for carrier
+        service_notification_period             24x7
+        service_notification_options            w,u,c,r,f,s                      ; do NOT use n here
+        service_notification_commands           notify-service-by-sms            ; Inherit from slim email template
         host_notification_period                24x7
-        host_notification_options               d,u,r,f,s           ; do NOT use n here
-        host_notification_commands              notify-host-by-sms ; Inherit from slim email template
+        host_notification_options               d,u,r,f,s                        ; do NOT use n here
+        host_notification_commands              notify-host-by-sms               ; Inherit from slim email template
         }
 
 define contact {
-    contact_name                    low_priority    ; For email notifications
-        use                         generic-contact                 ; Inherit from generic template above
-        alias                           notifypriority              ; Full name of user
-        email                           team_email\x40company.net   ; Alias used for general monitor msgs
-          service_notification_period             24x7
-        service_notification_options            w,u,c,r,f,s         ; do NOT use n here
+    contact_name                                low_priority                ; For email notifications
+        use                                     generic-contact             ; Inherit from generic template above
+        alias                                   notifypriority              ; Full name of user
+        email                                   team_email\x40company.net   ; Alias used for general monitor msgs
+        service_notification_period             24x7
+        service_notification_options            w,u,c,r,f,s                 ; do NOT use n here
         service_notification_commands           notify-service-by-email
-        host_notification_period                24x7                ; can be dialed back but users should adjust their mail settings instead
-        host_notification_options               d,u,r,f,s           ; do NOT use n here
+        host_notification_period                24x7                        ; can dial back but users should adjust mail settings instead
+        host_notification_options               d,u,r,f,s                   ; do NOT use n here
         host_notification_commands              notify-host-by-email
         }
 |g" /usr/local/nagios/etc/objects/contacts.cfg
@@ -179,9 +179,10 @@ echo "back up /usr/local/nagios/etc/objects/commands.cfg to .orig"
 cp /usr/local/nagios/etc/objects/commands.cfg /usr/local/nagios/etc/objects/commands.cfg.orig
 echo "add in a command to the end of the file"
 echo "define command{
-        command_name check_nrpe
-        command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
-        }
+command_name check_nrpe
+command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+}
+
 # 'notify-service-by-sms' command definition
 define command{
 command_name notify-service-by-sms
@@ -191,6 +192,18 @@ command_line /usr/bin/print '*** Nagios Alert*** $HOSTALIAS$/$SERVICEDESC$ is $S
 # 'notify-host-by-sms' command definition
 define command{
 command_name notify-host-by-sms
+command_line /usr/bin/printf '*** Nagios Alert*** $NOTIFICATIONTYPE$ : Host $HOSTALIAS$ is $HOSTSTATE$' | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$
+}
+
+# 'notify-service-by-pager' command definition
+define command{
+command_name notify-service-by-pager
+command_line /usr/bin/print '*** Nagios Alert*** $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$1' | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$
+}
+
+# 'notify-host-by-pager' command definition
+define command{
+command_name notify-host-by-pager
 command_line /usr/bin/printf '*** Nagios Alert*** $NOTIFICATIONTYPE$ : Host $HOSTALIAS$ is $HOSTSTATE$' | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$
 }
 " >> /usr/local/nagios/etc/objects/commands.cfg
