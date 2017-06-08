@@ -34,6 +34,7 @@ command[load]=/usr/lib64/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
 command[check_load]=/usr/lib64/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
 command[swap]=/usr/lib64/nagios/plugins/check_swap -w 20% -c 10%
 command[root_disk]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p / -m
+command[check_sda1]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p / -m
 command[usr_disk]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /usr -m
 command[var_disk]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /var -m
 command[zombie_procs]=/usr/lib64/nagios/plugins/check_procs -w 5 -c 10 -s Z
