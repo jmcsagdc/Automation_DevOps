@@ -44,16 +44,16 @@ define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        service_description             Root Partition
-        check_command                  check_sda1
-    contact_groups                 admins
+        check_command                  check'''+names[i]+'_sda1\n'
+    myFile+= '''contact_groups                 admins
         contacts                       alert_priority
 }
 define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        service_description             Users
-        check_command                  check_users
-}'''
+        check_command                  check_'''+names[i]+'_users\n'
+    myFile+= '}'
 
     outfileName='tmpFiles/'+names[i]+'.cfg'
     outfile=open(outfileName,'w')
