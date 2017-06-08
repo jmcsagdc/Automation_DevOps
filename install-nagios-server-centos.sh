@@ -233,5 +233,13 @@ To post a message to all the list members, send email to nagios-announce@lists.s
 
 https://lists.sourceforge.net/lists/listinfo/nagios-users
 To post a message to all the list members, send email to nagios-users@lists.sourceforge.net
-*********************************************************************************************"
+*********************************************************************************************
+
+To fix your configs if there are issues, check the following first:
+nano /usr/local/bin/gnokii
+nano /usr/local/nagios/etc/objects/commands.cfg
+nano /usr/local/nagios/etc/objects/contacts.cfg
+nano /usr/local/nagios/etc/servers/server-<**SERVER NAME**>-final.cfg
+
+"
 echo "DONE!"
