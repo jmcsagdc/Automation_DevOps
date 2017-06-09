@@ -44,4 +44,6 @@ command[proc_crond]=/usr/lib64/nagios/plugins/check_procs -w 1: -c 1:5 -C crond
 command[proc_syslogd]=/usr/lib64/nagios/plugins/check_procs -w 1: -c 1:2 -C syslog-ng
 command[proc_rsyslogd]=/usr/lib64/nagios/plugins/check_procs -w 1: -c 1:2 -C rsyslogd" >> /etc/nrpe.d/op5_commands.cfg
 
+service nrpe restart
+
 echo "DONE!"
