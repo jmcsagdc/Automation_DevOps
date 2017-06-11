@@ -11,7 +11,7 @@ for i in range(0, len(getMyType_l)):
 		myInstall=getMyType_l[i+1]
 #print getMyType
 print myInstall
-if '1' in myInstall:
+if 'desktop' in myInstall:
 	print 'Desktop'
 	# Client machine
 	doInstall=os.popen('echo "*** DESKTOP *** ">> /root/INSTALL.LOG 2>&1')
@@ -21,7 +21,7 @@ if '1' in myInstall:
 	doInstall=os.popen('echo "****** USED Python NFS client installer ****************" >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-rsyslog-client-50-default-all-os.py')
 	doInstall=os.popen('echo "****** USED Python rsyslog client installer ************" >> /root/INSTALL.LOG 2>&1')
-if '2' in myInstall:
+if 'ldap' in myInstall:
 	print 'LDAP'
 	# LDAP Server
 	doInstall=os.popen('echo "*** LDAP *** ">> /root/INSTALL.LOG')
@@ -31,7 +31,7 @@ if '2' in myInstall:
 	# LDAP hardening in the install script now
 	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-syslog-client-all-os.py')
-if '3' in myInstall:
+if 'nfs' in myInstall:
 	print 'NFS'
 	# NFS Server
 	doInstall=os.popen('echo "*** NFS *** ">> /root/INSTALL.LOG')
@@ -41,14 +41,14 @@ if '3' in myInstall:
 	#doInstall=os.popen('./create-nfs-client-installer-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-syslog-client-all-os.py')
-if '4' in myInstall:
+if 'postgres' in myInstall:
 	print 'Postgres'
 	# Postgres Server
 	doInstall=os.popen('echo "*** POSTGRES *** ">> /root/INSTALL.LOG')
 	doInstall=os.popen('./install-postgres-server-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-syslog-client-all-os.py')
-if '5' in myInstall:
+if 'django' in myInstall:
 	print 'Django'
 	# Django and Apache server
 	doInstall=os.popen('echo "*** DJANGO and APACHE *** ">> /root/INSTALL.LOG')
@@ -57,18 +57,48 @@ if '5' in myInstall:
 	doInstall=os.popen('touch /root/CHANGE-FIREWALL-IN-CLOUD-FOR-PORT-8000')
 	doInstall=os.popen('echo "****** CHANGE FIREWALL IN CLOUD FOR PORT 8000 ****************" >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-syslog-client-all-os.py')
-if '6' in myInstall:
+if 'plain' in myInstall:
 	print 'PLAIN'
 	# Postgres Server
 	doInstall=os.popen('echo "*** PLAIN *** ">> /root/INSTALL.LOG')
 	#doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 	#doInstall=os.popen('python install-syslog-client-all-os.py')
-if '7' in myInstall:
+if 'rsyslog' in myInstall:
 	print 'rsyslog'
 	# rsyslog Server
 	doInstall=os.popen('echo "*** rsyslog *** ">> /root/INSTALL.LOG')
 	doInstall=os.popen('./install-syslog-server-centos.sh >> /root/INSTALL.LOG 2>&1')
 	# DO DOT add the rsyslog client install here.
+if 'build' in myInstall:
+	print 'Build'
+	# Build server
+	doInstall=os.popen('echo "*** BUILD *** ">> /root/INSTALL.LOG')
+	doInstall=os.popen('./install-build-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('python install-syslog-client-all-os.py')
+if 'cacti' in myInstall:
+	print 'cacti'
+	# cacti server
+	doInstall=os.popen('echo "*** CACTI (there is a manual step involving browser) *** ">> /root/INSTALL.LOG')
+	doInstall=os.popen('./install-cacti-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('python install-syslog-client-all-os.py')
+	doInstall=os.popen('echo "*** remember to add your client configs *** ">> /root/INSTALL.LOG')
+if 'nagios' in myInstall:
+	print 'nagios'
+	# nagios server
+	doInstall=os.popen('echo "*** NAGIOS *** ">> /root/INSTALL.LOG')
+	doInstall=os.popen('./install-nagios-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('python install-syslog-client-all-os.py')
+	doInstall=os.popen('echo "*** remember to add your client configs *** ">> /root/INSTALL.LOG')
+if 'yum' in myInstall:
+	print 'yum'
+	# nagios server
+	doInstall=os.popen('echo "*** NAGIOS *** ">> /root/INSTALL.LOG')
+	doInstall=os.popen('./install-yum-repository-server-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
+	doInstall=os.popen('python install-syslog-client-all-os.py')
 print 'END!!!'
 #    pyRun=os.popen('touch /root/delete-to-reimage-on-boot')
 #else:
