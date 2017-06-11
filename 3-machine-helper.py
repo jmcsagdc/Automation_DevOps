@@ -83,6 +83,7 @@ if 'cacti' in myInstall:
 	doInstall=os.popen('./install-cacti-server-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('./utility-adjust-harden-centos.sh >> /root/INSTALL.LOG 2>&1')
 	doInstall=os.popen('python install-syslog-client-all-os.py')
+	doInstall=os.popen('service httpd restart')
 	doInstall=os.popen('echo "*** remember to add your client configs *** ">> /root/INSTALL.LOG')
 if 'nagios' in myInstall:
 	print 'nagios'
