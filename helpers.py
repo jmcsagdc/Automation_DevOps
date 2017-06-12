@@ -1,3 +1,45 @@
+def gcloudCommander(argCommand=''):
+    import os
+    import sys
+
+    #print len(sys.argv) # DEBUG
+    myCommand=''
+    if argCommand!='':   # If there is a command present as an arg
+        myCommand=argCommand # Set myCommand to that arg
+        print "DEBUG: "+myCommand
+
+
+    myHosts_l=[]
+    print 'DEBUG list displays. Ignore it.'
+    servers_results=GetCloudHostsData() # This contains a list with a dict and 2 lists inside
+    servers_dict=servers_results[0] # I just want the dict
+    #print type(servers_dict) # DEBUG
+    #print servers_dict # DEBUG
+
+    for k,v in servers_dict.iteritems():
+        #print k,v #DEBUG
+        myHosts_l.append(k)
+    print '\n\n'
+
+
+    if myCommand=='': # No argument where a command was specified, so ask
+        messageString="Please enter command to execute on all servers under sudo (don't include sudo):  "
+        sourceCommand=raw_input(messageString)
+    else:
+        sourceCommand=myCommand
+
+    for each in myHosts_l:
+        print each
+        theServer=each
+
+        commandString='gcloud compute ssh --zone us-central1-c '
+        commandString+=theServer+" --command 'sudo "
+        commandString+=sourceCommand+"'"
+        print commandString #DEBUG
+        print 'EXECUTING'
+        pyRun=os.popen(commandString).read()
+        print pyRun
+
 def GetCloudHostsData():
     import os
     tmp=open('tmp.txt','w')
