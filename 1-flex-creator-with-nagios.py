@@ -229,7 +229,9 @@ while moveOn==False:
 
 
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build','cacti','yum']
+systemTypes = ['nagios','plain','desktop','django','sql','nfs','ldap','rsyslog','build','cacti','yum'] 
+# Nagios must be first in systemTypes or system won't create scp lines for the new Nagios server for other servers
+
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
