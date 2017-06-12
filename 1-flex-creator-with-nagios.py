@@ -108,6 +108,10 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
     # build the string to create this instance's cfg for the nagios server
     pyNagiosCreateString='/tmp/nic-nagios-script.sh '+createMachineName+' '+newIP
     pyRun=os.popen(pyNagiosCreateString).read()
+    
+    # If you just created a Nagios server, append it to the Nagio server list for config file delivery
+    if 'nagios' in createMachineName:
+        nagiosServerList.append(createMachineName)
 
     # add this server to the queue to scp soon
     for destinationServer in nagiosServerList:
