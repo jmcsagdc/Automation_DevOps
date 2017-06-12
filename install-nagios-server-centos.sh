@@ -241,6 +241,9 @@ nano /usr/local/nagios/etc/objects/commands.cfg
 nano /usr/local/nagios/etc/objects/contacts.cfg
 nano /usr/local/nagios/etc/servers/server-<**SERVER NAME**>-final.cfg
 
+use the following command with your user to make it possible to copy in server configs:
+usermod -a -G nagios <USERNAME>
+
 "
 # Make it possible to copy in server configs. Add your user to nagios group to use.
 chown nagios. /usr/local/nagios/etc/servers
