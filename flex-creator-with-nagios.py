@@ -9,6 +9,7 @@
 #                        Nagios Server
 #                        Build
 #                        Cacti
+#                        Yum
 # Allows user to name net cluster to keep it all unique
 #
 # To add a server type to this, add to the systemTypes list
