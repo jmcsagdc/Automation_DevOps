@@ -1,30 +1,12 @@
+# Functionality moved to helpers.py
+
 from helpers import *
-import os
+import sys
 
-myHosts_l=[]
-print 'DEBUG list displays. Ignore it.'
-results_l=GetCloudHostsData() # Get full results
-servers_dict=results_l[0] # Use first item from results
-for k,v in servers_dict.iteritems():
-    #print k,v #DEBUG
-    myHosts_l.append(k)
-print '\n\n'
-print 'Here are the current servers available:'
-for each in myHosts_l:
-    print each
+#for i in range(0, len(sys.argv)): # DEBUG IF YOU SUSPECT ARGS ARE IGNORED
+    #print i, sys.argv[i]  # DEBUG IF YOU SUSPECT ARGS ARE IGNORED
+    #print "DEBUG"  # DEBUG IF YOU SUSPECT ARGS ARE IGNORED
 
-messageString='Please enter the name of the host to copy to:  '
-copyToServer=raw_input(messageString)
-messageString='Please enter path of file and filename to copy:  '
-sourcePath=raw_input(messageString)
-destPath='~/.'
-if copyToServer not in myHosts_l:
-    print "Don't be silly"
-    exit()
-else:
-    copyString='gcloud compute copy-files --zone us-central1-c '
-    copyString+=sourcePath+' '+copyToServer+':'+destPath
-    print copyString #DEBUG
-    print 'EXECUTING'
-    pyRun=os.popen(copyString).read()
-    print pyRun
+myDestination = sys.argv[1]
+mySourceFile  = sys.argv[2]
+gcloudCopier(myDestination,mySourceFile)
