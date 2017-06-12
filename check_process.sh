@@ -1,6 +1,21 @@
-# Add to nrpe.cfg:
+# Add to <MONITORED_SERVER_NAME> config: nrpe.cfg:
 # command[check_process]=/usr/lib64/nagios/plugins/check_process.sh <list of processes separated by spaces>
+# like:
+# command[check_process]=/usr/lib64/nagios/plugins/check_process.sh sshd httpd
 #
+# Add to nagios's server command configs for each <MONITORED_SERVER_NAME>.cfg file:
+# define service{
+#        use                             generic-service         ; Service template
+#        host_name                       <MONITORED_SERVER_NAME>
+#        service_description             Check My Processes
+#        check_command                   <UNIQUE_COMMAND_NAME>
+# }
+#
+# define command {
+#       command_name     check_process_nfs1
+#       command_line     /usr/local/nagios/libexec/check_nrpe -H <MONITORED_SERVER_NAME> -c <UNIQUE_COMMAND_NAME>
+#
+# PLUGIN:
 # Step one: Check for missing processes
 # iterate through the args process list and compare each to content of a filtered ps
 # missing = ALERT
