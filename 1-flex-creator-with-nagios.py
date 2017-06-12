@@ -111,7 +111,7 @@ def buildGcloudMachine(createMachineName,imageType,projectName,machineinstalltyp
 
     # add this server to the queue to scp soon
     for destinationServer in nagiosServerList:
-        scpListLine='gcloud compute scp /tmp/'+createMachineName+'.cfg '+destinationServer+':/tmp/'
+        scpListLine='gcloud compute copy-files /tmp/'+createMachineName+'.cfg '+destinationServer+':/tmp/'
         nagiosScpList.append(scpListLine)
 
     # At this point all instances are being created, one at a time. SCP after.
