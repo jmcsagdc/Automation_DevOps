@@ -132,13 +132,14 @@ cp /usr/local/nagios/etc/objects/contacts.cfg /usr/local/nagios/etc/objects/cont
 
 echo "add your email to nagios contacts and new contacts for group alerts and sms alerts"
 perl -pi -e "s|nagios\x40localhost|jmcsagdc\x40gmail.com
+}
 define contact {
-    contact_name                    high_priority                  ; For sms to duty phone
-        use                         generic-contact                 ; Inherit from generic template above
-        alias                           alertpriority               ; Full name of user
-        email                           PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
-        phone                           12062223333                 ; The phone number for the pager
-          service_notification_period             24x7
+    contact_name                         high_priority               ; For sms to duty phone
+        use                              generic-contact             ; Inherit from generic template above
+        alias                            alertpriority               ; Full name of user
+        email                            PHONENUMBER\x40tmobile.net  ; The sms forwarder appropriate for carrier
+        ;phone                           12062223333                 ; The phone number for the pager BAD USAGE
+        service_notification_period             24x7
         service_notification_options            w,u,c,r,f,s         ; do NOT use n here
         service_notification_commands           notify-service-by-pager
         host_notification_period                24x7
