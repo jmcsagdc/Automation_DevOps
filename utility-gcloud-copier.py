@@ -3,7 +3,8 @@ import os
 
 myHosts_l=[]
 print 'DEBUG list displays. Ignore it.'
-servers_dict=GetCloudHostsData()
+results_l=GetCloudHostsData() # Get full results
+servers_dict=results_l[0] # Use first item from results
 for k,v in servers_dict.iteritems():
     #print k,v #DEBUG
     myHosts_l.append(k)
