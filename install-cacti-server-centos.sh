@@ -71,6 +71,11 @@ cp /etc/cron.d/cacti /etc/cron.d/cacti.orig
 echo "Overwrite /etc/cron.d/cacti with desired polling time"
 echo '*/5 * * * *    cacti   /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1' > /etc/cron.d/cacti
 
+echo "Back up /etc/php.ini"
+cp /etc/php.ini /etc/php.ini.orig
+echo "...and fix the time zone for UTC"
+perl -pi -e 's|;date.timezone =|date.timezone = UTC|g' /etc/php.ini
+
 echo "MANUAL INSTALLING VIA WEBPAGES"
 echo "I clicked to ACCEPT, Next, Next, etc, then at the end"
 echo "selected Generic, Local, Net-SNMP since I have no"
