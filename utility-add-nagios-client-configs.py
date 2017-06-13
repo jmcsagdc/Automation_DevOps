@@ -26,11 +26,11 @@ for i in range(0, len(names)):
 }
 
 define command {
-       command_name     check_sda1
+       command_name     check_sda1'''+names[i]+'''
        command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_'''+names[i]+'''_sda1
 }
 define command {
-       command_name     check_users
+       command_name     check_users'''+names[i]+'''
        command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_'''+names[i]+'''_users
 }
 
