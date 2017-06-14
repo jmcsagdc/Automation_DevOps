@@ -37,7 +37,7 @@ graph to the system for a client host:
 '''
 
 
-for i in range(1, serverCount):
+for i in range(1, serverCount+1):
     for each in myGraphTemplates:
         commandString="php -q /var/lib/cacti/cli/add_graphs.php --host-id="+str(i)
         commandString+=" --graph-type=cg --graph-template-id="+str(each)
