@@ -26,12 +26,12 @@ for i in range(0, len(names)):
 }
 
 define command {
-       command_name     check_sda1'''+names[i]+'''
-       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_'''+names[i]+'''_sda1
+       command_name     check_sda1_'''+names[i]+'''
+       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_sda1
 }
 define command {
-       command_name     check_users'''+names[i]+'''
-       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_'''+names[i]+'''_users
+       command_name     check_users_'''+names[i]+'''
+       command_line     /usr/local/nagios/libexec/check_nrpe -H '''+names[i]+''' -c check_users
 }
 
 define service {
@@ -44,15 +44,15 @@ define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        service_description             Root Partition
-        check_command                  check'''+names[i]+'_sda1\n'
-    myFile+= '''contact_groups                 admins
-        contacts                       alert_priority
+        check_command                  check_sda1_'''+names[i]+'\n'
+    myFile+= '''        contact_groups                 admins
+        contacts                       high_priority
 }
 define service {
         use                             generic-service
         host_name                       '''+names[i]+'\n'
     myFile+= '''        service_description             Users
-        check_command                  check_'''+names[i]+'_users\n'
+        check_command                  check_users_'''+names[i]+'\n'
     myFile+= '}'
 
     outfileName='tmpFiles/'+names[i]+'.cfg'
