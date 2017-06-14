@@ -122,11 +122,14 @@ def GetCloudHostsData():
 
     # print names # DEBUG
 
-    # Now print your lists of servers and ips
+    # Now print your lists of servers and ips # DEBUG
+    '''
     for i in range(0, len(names)):
         print names[i]+':'+local_ips[i]
-
-    # Want it in a dictionary?
+    '''
+    
+    # Return a dictionary and a couple of lists in a tuple.
+    # Choose your own adventure.
 
     myServerDict={}
     for x in range(0, len(names)):
