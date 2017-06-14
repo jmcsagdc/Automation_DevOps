@@ -27,8 +27,8 @@ I am also making the tree ID a variable so you can change that if you need to wi
 '''
 treeID=1  # Mine is the Default Tree = 1
 
-for i in range(1, serverCount+1):
-    commandString="php -q /var/lib/cacti/cli/add_tree.php --host-id="+str(i)
+for i in range(0, serverCount+1):
+    commandString="php -q /var/lib/cacti/cli/add_tree.php --host-id="+str(i+1)
     commandString+=" --tree-id="+str(treeID)+" --type=node --node-type=host"
     pyRun=os.popen(commandString).read()    # Running the php command
     print str(i)+"   "+pyRun                # Result is returned to user
