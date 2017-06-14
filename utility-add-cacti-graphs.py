@@ -37,9 +37,9 @@ graph to the system for a client host:
 '''
 
 
-for i in range(1, serverCount+1):
+for i in range(0, serverCount+1):
     for each in myGraphTemplates:
-        commandString="php -q /var/lib/cacti/cli/add_graphs.php --host-id="+str(i)
+        commandString="php -q /var/lib/cacti/cli/add_graphs.php --host-id="+str(i+1)
         commandString+=" --graph-type=cg --graph-template-id="+str(each)
         pyRun=os.popen(commandString).read()    # Running the php command
         print str(i)+"   "+pyRun                # Result is returned to user
