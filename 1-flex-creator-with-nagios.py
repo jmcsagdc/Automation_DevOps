@@ -66,7 +66,7 @@ else
   fi
   chmod -x *.py
   chmod -x *.md
-  python 3-machine-helper.py
+  python 3-full-machine-helper.py
 fi
 '''
 
