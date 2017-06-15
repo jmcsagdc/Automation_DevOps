@@ -134,9 +134,10 @@ while moveOn==False:
         moveOn=True
 
 
-
+# TODO: Deal with likely race condition for client configs of monitorying servers since both want to be last.
+# TODO: Likely a long sleep on each in the machine-helper.py can make sure both add their client configs late.
 systemQuantity = {}
-systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build','cacti','yum']
+systemTypes = ['plain','desktop','django','sql','nfs','ldap','rsyslog','nagios','build','yum','cacti']
 for systemType in systemTypes:
     systemQuantity[systemType] = int(raw_input('How many '+systemType+' VMs? '))
 
@@ -162,7 +163,7 @@ for each in systemTypes:
                 projectName='centos-cloud'
 
             # Handle webserver requirements by excluding those that DO NOT need http
-            if each in 'nfs desktop sql rsyslog':
+            if each in 'nfs desktop sql rsyslog build':
                 myTags=''
             else:
                 myTags='--tags http-server,https-server'
