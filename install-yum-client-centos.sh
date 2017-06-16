@@ -1,4 +1,4 @@
-myYumServer=$(gcloud compute instances list | grep "yum\|repo" | awk "{ print $1 }") 
+myYumServer=$(gcloud compute instances list | grep "yum\|repo" | awk '{ print $1 }' | awk '{ print $1 }') 
 
 echo "Installing CLIENT YUM REPOSITORY"
 
@@ -6,7 +6,7 @@ echo "Installing CLIENT YUM REPOSITORY"
 echo "[myrepo]
 name=Network Repository
 baseurl=ftp://$myYumServer/pub/localrepo/CentOS/7/0/x86_64
-gpcheck=0
+gpgcheck=0
 enabled=1" > /etc/yum.repos.d/myrepo.repo
 
 yum update
