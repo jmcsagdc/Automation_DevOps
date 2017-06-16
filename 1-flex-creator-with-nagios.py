@@ -158,10 +158,12 @@ scriptContents='''
 #!/bin/bash
 host="$1" # get these from python's call to this script
 ip="$2"
-# Modified by jmcsagdc just to remove the
+# Modified by jmcsagdc to remove the
 # error-checking and usage since this will go to 
-# a wrapper for execution. The wrapper is likely
-# just a call from the flexible-creator.py
+# a wrapper for execution. 
+
+# Also fixed command bugs
+
 echo "
 # Host Definition
 define host {
@@ -170,36 +172,86 @@ define host {
     alias       web server          ; A longer name associated with the host
     address     $ip                 ; IP address of the host
 }
-# Service Definition
+define service{
+        use                             generic-service         ; Service template
+        host_name                       $host
+        service_description             Check My Processes
+        check_command                   $host_check_processes
+}
+define command {
+        command_name     $host_check_processes
+        command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_process
+}
+define service{
+        use                             generic-service         ; Service template
+        host_name                       $host
+        service_description             Check Python
+        check_command                   $host_check_python
+}
+define command {
+        command_name     $host_check_python
+        command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_python
+}
+
+
+
+define command {
+       command_name     check_$host_load
+       command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_load
+}
+define command {
+       command_name     check_$host_users
+       command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_users
+}
+define command {
+       command_name     check_$host_disk
+       command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_disk
+}
+define command {
+       command_name     check_$host_total_procs
+       command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_total_procs
+}
+define command {
+       command_name     check_$host_mem
+       command_line     /usr/local/nagios/libexec/check_nrpe -H $host -c check_mem
+}
+
+
+define service {
+        use                             generic-service
+        host_name                       $host
+        service_description             PING
+        check_command                   check_ping!100.0,20%!500.0,60%
+}
 define service{
         use                             generic-service         ; Service template
         host_name                       $host
         service_description             load
-        check_command                   check_nrpe!check_load
+        check_command                   check_$host_load
 }
 define service{
         use                             generic-service         ; Service template
         host_name                       $host
         service_description             users
-        check_command                   check_nrpe!check_users
+        check_command                   check_$host_users
 }
 define service{
         use                             generic-service         ; Service template
         host_name                       $host
         service_description             disk
-        check_command                   check_nrpe!check_disk
+        check_command                   check_$host_disk
 }
 define service{
         use                             generic-service         ; Service template
         host_name                       $host
         service_description             totalprocs
-        check_command                   check_nrpe!check_total_procs
+        check_command                   check_$host_total_procs
 }
 define service{
         use                             generic-service         ; Service template
         host_name                       $host
         service_description             memory
-        check_command                   check_nrpe!check_mem
+        check_command                   check_$host_mem
 }
 ">> /tmp/"$host".cfg # Drop this into temp location for scp into cloud instance
 '''
