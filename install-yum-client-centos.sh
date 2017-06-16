@@ -1,6 +1,6 @@
-echo "Installing CLIENT YUM REPOSITORY"
+myYumServer=$(gcloud compute instances list | grep "yum\|repo" | awk "{ print $1 }") 
 
-myYumServer=$('gcloud compute instances list | grep "yum\|repo" | awk "{ print $1 }"') 
+echo "Installing CLIENT YUM REPOSITORY"
 
 #nano /etc/yum.repos.d/myrepo.repo
 echo "[myrepo]
