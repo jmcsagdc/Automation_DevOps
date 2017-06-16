@@ -1,3 +1,7 @@
+# Run on Nagios Server
+
+# Repeat runs will cause duplication
+
 # Takes	a hostname in arg. This	is used	to make
 # the commands unique and to reference the file 
 # we are appending to in /usr/local/nagios/etc/servers
