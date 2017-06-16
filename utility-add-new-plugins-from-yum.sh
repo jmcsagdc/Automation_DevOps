@@ -13,7 +13,7 @@ define service{
 
 define command {
         command_name     $1_check_processes
-        command_line     /usr/local/nagios/libexec/check_nrpe -H $1 -c check_processes
+        command_line     /usr/local/nagios/libexec/check_nrpe -H $1 -c check_process
 }
 
 define service{
