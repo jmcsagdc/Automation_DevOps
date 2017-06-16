@@ -278,11 +278,11 @@ for each in systemTypes:
 # SCP cfg files to all Nagios servers. This goes down at the end.
 # Likely, we'd want more than one monitoring station and this is just easier
 
-#TODO UNDEBUG THE FOLLOWING. Right now we are creating but not copying the files.
+#
 
 for each in nagiosScpList:
     pyRun=each # DEBUG
-    #pyRun=os.popen(each).read() # execute each scp in list.
-    print pyRun # return result to console and move on to next
+    pyRun=os.popen(each).read() # execute each scp in list.
+    #print pyRun # return result to console and move on to next
                 # scp action for this Nagios server. This way, 
                 # each server receives full scp list of files
