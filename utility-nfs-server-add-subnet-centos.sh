@@ -1,3 +1,5 @@
+#TODO Make dynamic. Check out that ugly hardcode network.
+
 myKernel=$(uname -r | grep 'generic')
 
 echo 'myKernel is ' $myKernel
